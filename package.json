@@ -1,0 +1,23 @@
+{
+  "name": "wheel_c",
+  "version": "1.0.0",
+  "description": "这是一个UI框架",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beauty-c/wheel_c.git"
+  },
+  "keywords": [
+    "vue",
+    "ui"
+  ],
+  "author": "Lijuan Cheng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/beauty-c/wheel_c/issues"
+  },
+  "homepage": "https://github.com/beauty-c/wheel_c#readme"
+}
