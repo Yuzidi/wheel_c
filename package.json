@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/beauty-c/wheel_c/issues"
   },
-  "homepage": "https://github.com/beauty-c/wheel_c#readme"
+  "homepage": "https://github.com/beauty-c/wheel_c#readme",
+  "dependencies": {
+    "vue": "^2.6.11"
+  }
 }
