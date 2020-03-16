@@ -1,8 +1,6 @@
 <template>
   <button class="g-button" :class="{[`icon-${iconPosition}`]: true}">
-      <svg v-if='icon' class="icon">
-          <use :xlink:href='`#icon-${icon}`'></user>
-      </svg>
+      <g-icon v-if='icon' :name='icon'></g-icon>
       <div class="content">
         <slot></slot>
       </div>
@@ -46,8 +44,6 @@ export default {
     outline: none;
   }
   .icon {
-      height: 1em;
-      width: 1em;
       order: 1;
       margin-right: .2em;
   }
