@@ -1,20 +1,28 @@
 <template>
   <div class="button-group">
-      <slot></slot>
+    <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-
-}
+  mounted() {
+    for (let node of this.$el.children) {
+      let name = node.nodeName.toLowerCase();
+      if(name !== 'button') {
+        console.warn(`g-button-group的子元素应该全为g-button, 但你写的是 ${name}`);
+        
+      }
+    }
+  }
+};
 </script>
 
 <style lang='scss'>
-.button-group{ 
+.button-group {
   display: inline-flex;
   vertical-align: middle;
-  >.g-button {
+  > .g-button {
     border-radius: 0;
     margin-left: -1px;
     &:first-child {
