@@ -1,6 +1,6 @@
 {
   "name": "wheel_c-0-0-1",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "这是一个UI框架",
   "main": "index.js",
   "scripts": {
@@ -42,7 +42,7 @@
     "less": "^3.10.3",
     "mocha": "^6.2.2",
     "parcel-bundler": "^1.12.4",
-    "sass": "^1.25.0",
+    "sass": "^1.26.3",
     "sinon": "^7.5.0",
     "sinon-chai": "^3.4.0",
     "vue-template-compiler": "^2.6.11",
