@@ -1,6 +1,6 @@
 {
-  "name": "wheel_c",
-  "version": "1.0.0",
+  "name": "lijuan-gulu-0-0-1",
+  "version": "0.0.1",
   "description": "这是一个UI框架",
   "main": "index.js",
   "scripts": {
@@ -48,7 +48,7 @@
     "vue-template-compiler": "^2.6.11",
     "vuepress": "^1.2.0"
   },
-    "alias": {
-      "vue" : "./node_modules/vue/dist/vue.common.js"
-    }
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.common.js"
+  }
 }
