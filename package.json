@@ -2,7 +2,7 @@
   "name": "wheel_c-0-0-1",
   "version": "0.0.5",
   "description": "这是一个UI框架",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": ".\\node_modules\\.bin\\parcel index.html --no-cache"
