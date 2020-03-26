@@ -11,6 +11,14 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
+$height: 32px;
+$border-color: #999;
 
+.wrapper {
+    > input {
+        height: $height;
+        border: 1px solid $border-color;
+    }
+}
 </style>
