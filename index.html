@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-23 09:58:20
- * @LastEditTime: 2020-04-23 11:18:34
+ * @LastEditTime: 2020-04-23 17:02:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ftmb-clientc:\Users\Administrator\Desktop\learn\wheel_c\index.html
@@ -48,7 +48,10 @@
             <g-input value='李四' readonly></g-input>
         </div>
         <div class="box">
-            <g-input value='张' error='姓名不少于两个字'></g-input>
+            <g-input value='张' @change="inputchange" v-model='message'></g-input>
+            <g-input value='张' @change="inputchange" :value='message' @input='message = $event'></g-input>
+            <p>{{message}}</p>
+            <button @click='message+=1'>+1</button>
         </div>
         <div class="box">
             <g-button :loading='loading1' @click='loading1 = !loading1'>
