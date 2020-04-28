@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-26 17:28:13
- * @LastEditTime: 2020-04-28 10:05:09
+ * @LastEditTime: 2020-04-28 16:21:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ftmb-clientc:\Users\Administrator\Desktop\learn\wheel_c\src\col.vue
@@ -54,9 +54,6 @@ export default {
 <style lang='scss' scoped>
 .col {
   width: 50%;
-  background-color: skyblue;
-  height: 100px;
-  border: 2px solid black;
 
   $class-prefix: col-;
   @for $n from 1 through 24 {
