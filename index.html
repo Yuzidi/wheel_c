@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-23 09:58:20
- * @LastEditTime: 2020-04-23 17:02:57
+ * @LastEditTime: 2020-04-28 18:15:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ftmb-clientc:\Users\Administrator\Desktop\learn\wheel_c\index.html
@@ -38,10 +38,33 @@
     .box {
         margin-bottom: 20px;
     }
+    .demobox {
+        height: 50px;
+        background-color: skyblue;
+        border: 1px solid #000;
+    }
 </style>
 
 <body>
     <div id='app' style="padding: 20px">
+        <div>
+        <g-row>
+            <g-col class="demobox" 
+            :phone='{span:2}'
+            :ipad='{span:4}'
+            :narrow-pc='{span:6}'
+            :pc='{span:8}'
+            :wide-pc='{span:24}'
+            >1</g-col>
+            <g-col class="demobox" 
+            :phone='{span:22}'
+            :ipad='{span:20}'
+            :narrow-pc='{span:18}'
+            :pc='{span:16}'
+            :wide-pc='{span:24}'
+            >2</g-col>
+        </g-row>
+    </div>
         <div class="box">
             <g-input value='张三'></g-input>
             <g-input value='李四' disabled></g-input>
