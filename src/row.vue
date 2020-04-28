@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-26 17:28:06
- * @LastEditTime: 2020-04-28 15:59:11
+ * @LastEditTime: 2020-04-28 18:15:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ftmb-clientc:\Users\Administrator\Desktop\learn\wheel_c\src\row.vue
@@ -49,5 +49,6 @@ export default {
 <style scoped>
 .row {
   display: flex;
+  flex-wrap: wrap;
 }
 </style>
