@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-29 15:33:38
- * @LastEditTime: 2020-04-29 17:59:26
+ * @LastEditTime: 2020-04-29 18:05:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\sider.vue
  -->
 <template>
-  <transition name="fade">
+  <transition name="slide">
     <div class="sider" v-if='visible'>
       <slot></slot>
       <button @click='visible = false'>close</button>
@@ -38,10 +38,10 @@ export default {
     right: 0;
   }
 }
-.fade-enter-active, .fade-leave-active {
+.slide-enter-active, .slide-leave-active {
   transition: all .5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.slide-enter, .slide-leave-to {
   margin-left: -200px;
 }
 </style>
