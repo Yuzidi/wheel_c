@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-23 09:58:20
- * @LastEditTime: 2020-04-29 10:40:34
+ * @LastEditTime: 2020-04-29 17:57:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ftmb-clientc:\Users\Administrator\Desktop\learn\wheel_c\index.html
@@ -35,32 +35,39 @@
     body {
         font-size: var(--font-size);
     }
+
     .box {
         margin-bottom: 20px;
     }
+
     .demobox {
-        height: 50px;
+        min-height: 50px;
         background-color: skyblue;
         border: 1px solid #000;
+    }
+    .sider {
+        width: 200px;
     }
 </style>
 
 <body>
-    <div id='app' style="padding: 20px">
-        <div>
-        <g-row>
-            <g-col class="demobox"
-            :ipad='{span:4}'
-            :pc='{span:8}'
-            :wide-pc='{span:24}'
-            >1</g-col>
-            <g-col class="demobox" 
-            :ipad='{span:20}'
-            :pc='{span:16}'
-            :wide-pc='{span:24}'
-            >2</g-col>
-        </g-row>
-    </div>
+    <div id='app'>
+        <g-layout style='height: 100vh;border: 1px solid red'>
+            <g-sider class="demobox">sider</g-sider>
+            <g-layout>
+                <g-header class="demobox">header</g-header>
+                
+                <g-content class="demobox">content</g-content>
+                <g-footer class="demobox aaa">footer</g-footer>
+            </g-layout>
+            
+        </g-layout>
+        <!-- <div>
+            <g-row>
+                <g-col class="demobox" :ipad='{span:4}' :pc='{span:8}' :wide-pc='{span:24}'>1</g-col>
+                <g-col class="demobox" :ipad='{span:20}' :pc='{span:16}' :wide-pc='{span:24}'>2</g-col>
+            </g-row>
+        </div>
         <div class="box">
             <g-input value='张三'></g-input>
             <g-input value='李四' disabled></g-input>
@@ -87,7 +94,7 @@
                 <g-button>更多</g-button>
                 <g-button icon='right' icon-position='right'>下一页</g-button>
             </g-button-group>
-        </div>
+        </div> -->
     </div>
     <script src="./src/app.js"></script>
     <!-- <script src="//at.alicdn.com/t/font_1694322_ejpw0j3z7uf.js"></script> -->
