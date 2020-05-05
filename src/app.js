@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-23 09:58:20
- * @LastEditTime: 2020-04-29 17:26:22
+ * @LastEditTime: 2020-05-05 14:59:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ftmb-clientc:\Users\Administrator\Desktop\learn\wheel_c\src\app.js
@@ -18,6 +18,8 @@ import Header from './header.vue'
 import Sider from './sider.vue'
 import Content from './content.vue'
 import Footer from './footer.vue'
+import Toast from './toast.vue'
+import plugin from './plugin.js'
 
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
@@ -30,6 +32,8 @@ Vue.component('g-header', Header)
 Vue.component('g-sider', Sider)
 Vue.component('g-content', Content)
 Vue.component('g-footer', Footer)
+Vue.component('g-toast', Toast)
+Vue.use(plugin)
 
 new Vue({
     el: '#app',
@@ -42,6 +46,12 @@ new Vue({
     methods: {
         inputchange(e) {
             console.log(e);
+        },
+        showToast() {
+            this.$toast('我是 message')
         }
     },
+    created() {
+        // this.$toast()
+    }
 }) 
