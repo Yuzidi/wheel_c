@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-23 09:58:20
- * @LastEditTime: 2020-05-05 14:59:19
+ * @LastEditTime: 2020-05-05 16:23:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ftmb-clientc:\Users\Administrator\Desktop\learn\wheel_c\src\app.js
@@ -48,10 +48,12 @@ new Vue({
             console.log(e);
         },
         showToast() {
-            this.$toast('我是 message')
+            this.$toast('<h1>aaaa</h1>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', {
+                enableHtml: false
+            })
         }
     },
     created() {
         // this.$toast()
     }
-}) 
+})
