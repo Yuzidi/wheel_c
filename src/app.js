@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-23 09:58:20
- * @LastEditTime: 2020-05-07 16:44:46
+ * @LastEditTime: 2020-05-07 17:06:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ftmb-clientc:\Users\Administrator\Desktop\learn\wheel_c\src\app.js
@@ -51,7 +51,7 @@ new Vue({
             this.$toast(`aaaa${parseInt(Math.random()*100)}`, {
                 enableHtml: false,
                 position: 'middle ',
-                autoClose: false
+                autoClose: 10
             })
         }
     },

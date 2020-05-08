@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-05 10:47:53
- * @LastEditTime: 2020-05-07 16:45:47
+ * @LastEditTime: 2020-05-07 17:14:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\toast.vue
@@ -24,12 +24,11 @@ export default {
   name: "GuluToast",
   props: {
     autoClose: {
-      type: Boolean,
-      default: true
-    },
-    autoCloseDelay: {
-      type: Number,
-      default: 5
+      type: [Boolean, Number],
+      default: 5,
+      validator(value) {
+        return value === false || typeof value === 'number'
+      }
     },
     closeButton: {
       type: Object,
@@ -64,14 +63,11 @@ export default {
         this.closeButton.callback(this);
       }
     },
-    log() {
-      console.log("aaaa");
-    },
     execAutoClose() {
       if (this.autoClose) {
         setTimeout(() => {
           this.close();
-        }, this.autoCloseDelay * 1000);
+        }, this.autoClose * 1000);
       }
     },
     updateStyles() {
