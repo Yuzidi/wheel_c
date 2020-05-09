@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-09 10:25:43
- * @LastEditTime: 2020-05-09 15:56:44
+ * @LastEditTime: 2020-05-09 17:09:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\tabs.vue
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 export default {
   name: "GuluTabs",
   props: {
@@ -26,6 +27,16 @@ export default {
       validator(value) {
         return ["horizontal", "vertical"].indexOf(value) >= 0;
       }
+    }
+  },
+  data() {
+    return {
+      eventBus: new Vue()
+    }
+  },
+  provide() {
+    return {
+      eventBus: this.eventBus
     }
   }
 };

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-09 10:27:13
- * @LastEditTime: 2020-05-09 10:29:51
+ * @LastEditTime: 2020-05-09 17:13:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\tabs-header.vue
@@ -15,7 +15,9 @@
 <script>
 export default {
   name: 'GuluTabsBody',
-  
+  inject: ['eventBus'],
+  created() {
+  }
 }
 </script>
 
