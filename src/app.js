@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-23 09:58:20
- * @LastEditTime: 2020-05-07 17:06:20
+ * @LastEditTime: 2020-05-09 15:03:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ftmb-clientc:\Users\Administrator\Desktop\learn\wheel_c\src\app.js
@@ -20,6 +20,11 @@ import Content from './content.vue'
 import Footer from './footer.vue'
 import Toast from './toast.vue'
 import plugin from './plugin.js'
+import Tabs from './tabs.vue'
+import TabsHead from './tabs-head.vue'
+import TabsBody from './tabs-body.vue'
+import TabsItem from './tabs-item.vue'
+import TabsPane from './tabs-pane.vue'
 
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
@@ -33,15 +38,17 @@ Vue.component('g-sider', Sider)
 Vue.component('g-content', Content)
 Vue.component('g-footer', Footer)
 Vue.component('g-toast', Toast)
+Vue.component('g-tabs', Tabs)
+Vue.component('g-tabs-head', TabsHead)
+Vue.component('g-tabs-body', TabsBody)
+Vue.component('g-tabs-item', TabsItem)
+Vue.component('g-tabs-pane', TabsPane)
 Vue.use(plugin)
 
 new Vue({
     el: '#app',
     data: {
-        loading1: false,
-        loading2: true,
-        loading3: false,
-        message: 'h1'
+        selectedTab: 'sports'
     },
     methods: {
         inputchange(e) {
