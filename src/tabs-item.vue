@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-09 10:27:13
- * @LastEditTime: 2020-05-11 15:28:31
+ * @LastEditTime: 2020-05-11 16:28:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\tabs-header.vue
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     xxx() {
-      this.eventBus.$emit('update:selected', this.name)
+      this.eventBus.$emit('update:selected', this.name, this)
     }
   },
   inject: ['eventBus'],
@@ -52,6 +52,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+$blue: blue;
 .tabs-item {
   /* flex-grow: 1; */
   flex-shrink: 0;
@@ -60,9 +61,10 @@ export default {
   height: 100%;
   display: flex;
   align-items: center;
-  border: 1px solid green;
+  // border: 1px solid green;
   &.active {
-    background-color: red;
+    // background-color: red;
+    color: $blue;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-09 10:25:43
- * @LastEditTime: 2020-05-11 10:15:25
+ * @LastEditTime: 2020-05-11 16:40:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\tabs.vue
@@ -35,7 +35,15 @@ export default {
     }
   },
   mounted() {
-    this.eventBus.$emit('update:selected', this.selected)
+    this.$children.forEach(vm => {
+      if(vm.$options.name === "GuluTabsHead") {
+        vm.$children.forEach(childVm => {
+          if(childVm.$options.name === 'GuluTabsItem' && childVm.name === this.selected) {
+            this.eventBus.$emit('update:selected', this.selected, childVm)
+          }
+        })
+      }
+     })
   },
   provide() {
     return {
