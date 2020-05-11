@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-09 10:27:13
- * @LastEditTime: 2020-05-11 10:19:15
+ * @LastEditTime: 2020-05-11 15:28:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\tabs-header.vue
@@ -56,6 +56,11 @@ export default {
   /* flex-grow: 1; */
   flex-shrink: 0;
   padding: 0 1em;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid green;
   &.active {
     background-color: red;
   }
