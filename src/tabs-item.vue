@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-09 10:27:13
- * @LastEditTime: 2020-05-09 17:26:01
+ * @LastEditTime: 2020-05-11 10:19:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\tabs-header.vue
  -->
 <template>
-  <div class="tabs-item" @click='xxx'>
+  <div class="tabs-item" @click='xxx' :class="classes">
     <slot></slot>
   </div>
 </template>
@@ -26,6 +26,14 @@ export default {
   },
   data() {
     return {
+      active: false,
+    }
+  },
+  computed: {
+    classes() {
+      return {
+        active: this.active
+      }
     }
   },
   methods: {
@@ -36,15 +44,20 @@ export default {
   inject: ['eventBus'],
   created() {
     this.eventBus.$on('update:selected', (name) => {
-      console.log(name);
+      this.active = name === this.name
     })
   },
   
 }
 </script>
 
-<style>
+<style lang='scss' scoped>
 .tabs-item {
-  
+  /* flex-grow: 1; */
+  flex-shrink: 0;
+  padding: 0 1em;
+  &.active {
+    background-color: red;
+  }
 }
 </style>

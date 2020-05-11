@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-09 10:27:13
- * @LastEditTime: 2020-05-09 17:13:11
+ * @LastEditTime: 2020-05-11 10:15:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\tabs-header.vue
@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang='scss' scoped>
 .tabs-body {
   
 }

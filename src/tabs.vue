@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-09 10:25:43
- * @LastEditTime: 2020-05-09 17:09:31
+ * @LastEditTime: 2020-05-11 10:15:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\tabs.vue
@@ -34,6 +34,9 @@ export default {
       eventBus: new Vue()
     }
   },
+  mounted() {
+    this.eventBus.$emit('update:selected', this.selected)
+  },
   provide() {
     return {
       eventBus: this.eventBus
@@ -42,7 +45,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang='scss' scoped>
 /* .tabs {
   
 } */
