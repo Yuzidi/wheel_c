@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-09 10:27:13
- * @LastEditTime: 2020-05-12 09:40:28
+ * @LastEditTime: 2020-05-12 09:50:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\tabs-header.vue
@@ -33,12 +33,14 @@ export default {
 <style lang='scss' scoped>
 $tab-height: 40px;
 $blue: blue;
+$border-color: #ddd;
 .tabs-head {
   display: flex;
   height: $tab-height;
   justify-content: flex-start;
   // border: 1px solid red;
   position: relative;
+  border-bottom: 1px solid $border-color;
   > .line {
     position: absolute;
     bottom: 0;
@@ -47,6 +49,10 @@ $blue: blue;
   }
   > .actions-wrapper {
     margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1em;
   }
 }
 </style>

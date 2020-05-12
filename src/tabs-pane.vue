@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-09 10:27:13
- * @LastEditTime: 2020-05-11 10:19:22
+ * @LastEditTime: 2020-05-12 09:48:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\tabs-header.vue
@@ -43,8 +43,9 @@ export default {
 
 <style lang='scss' scoped>
 .tabs-pane {
-  &.active {
-    background-color: red;
-  }
+  padding: 1em;
+  // &.active {
+    // background-color: red;
+  // }
 }
 </style>
