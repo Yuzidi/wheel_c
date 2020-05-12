@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-09 10:27:13
- * @LastEditTime: 2020-05-12 09:59:59
+ * @LastEditTime: 2020-05-12 10:01:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\tabs-header.vue
@@ -39,7 +39,6 @@ export default {
   },
   methods: {
     onclick() {
-      console.log(this.disabled);
       if(this.disabled) {return}
       this.eventBus.$emit('update:selected', this.name, this)
     }
@@ -72,6 +71,7 @@ $disabled-text-color: grey;
   }
   &.disabled {
     color: $disabled-text-color;
+    cursor: not-allowed;
   }
 }
 </style>
