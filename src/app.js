@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-23 09:58:20
- * @LastEditTime: 2020-05-12 14:50:46
+ * @LastEditTime: 2020-05-12 17:10:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ftmb-clientc:\Users\Administrator\Desktop\learn\wheel_c\src\app.js
@@ -53,6 +53,9 @@ new Vue({
         selectedTab: 'sports'
     },
     methods: {
+        yyy() {
+          console.log('yyy');  
+        },
         inputchange(e) {
             console.log(e);
         },

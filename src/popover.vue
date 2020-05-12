@@ -1,17 +1,17 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-12 14:40:23
- * @LastEditTime: 2020-05-12 16:37:46
+ * @LastEditTime: 2020-05-12 18:15:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\popover.vue
  -->
 <template>
-  <div class="popover" @click.stop="xxx">
-    <div ref="contentWrapper" class="content-wrapper" v-if="visible" @click.stop>
+  <div class="popover" @click="onClick" ref="popover">
+    <div ref="contentWrapper" class="content-wrapper" v-if="visible">
       <slot name="content"></slot>
     </div>
-    <span ref="trigger">
+    <span ref="triggerWrapper">
       <slot></slot>
     </span>
   </div>
@@ -26,20 +26,34 @@ export default {
     };
   },
   methods: {
-    xxx() {
-      this.visible = !this.visible;
-      if (this.visible === true) {
-        this.$nextTick(() => {
-          document.body.appendChild(this.$refs.contentWrapper);
-          let { top, left } = this.$refs.trigger.getBoundingClientRect();
-          this.$refs.contentWrapper.style.left = left + window.scrollX + "px";
-          this.$refs.contentWrapper.style.top = top + window.scrollY + "px";
-          let eventHandler = () => {
-            this.visible = false;
-            document.removeEventListener("click", eventHandler);
-          };
-          document.addEventListener("click", eventHandler);
-        });
+    positionContent() {
+      document.body.appendChild(this.$refs.contentWrapper);
+      let { top, left } = this.$refs.triggerWrapper.getBoundingClientRect();
+      this.$refs.contentWrapper.style.left = left + window.scrollX + "px";
+      this.$refs.contentWrapper.style.top = top + window.scrollY + "px";
+    },
+    onClickDocument(e) {
+      if (!(this.$refs.contentWrapper && this.$refs.contentWrapper.contains(e.target))) {
+        this.visible = false;
+        console.log("guanbi");
+        document.removeEventListener("click", this.onClickDocument);
+      }
+    },
+    onShow() {
+      setTimeout(() => {
+        this.positionContent();
+        document.addEventListener("click", this.onClickDocument);
+      }, 100);
+    },
+    onClick(event) {
+      if (this.$refs.triggerWrapper.contains(event.target)) {
+        this.visible = !this.visible;
+        if (this.visible === true) {
+          this.onShow();
+        } else {
+          console.log("guanbi");
+          document.removeEventListener("click", this.onClickDocument);
+        }
       }
     }
   }
