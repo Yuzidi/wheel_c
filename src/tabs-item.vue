@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-09 10:27:13
- * @LastEditTime: 2020-05-11 16:28:13
+ * @LastEditTime: 2020-05-12 09:59:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\tabs-header.vue
  -->
 <template>
-  <div class="tabs-item" @click='xxx' :class="classes">
+  <div class="tabs-item" @click='onclick' :class="classes">
     <slot></slot>
   </div>
 </template>
@@ -32,12 +32,15 @@ export default {
   computed: {
     classes() {
       return {
-        active: this.active
+        active: this.active,
+        disabled: this.disabled
       }
     }
   },
   methods: {
-    xxx() {
+    onclick() {
+      console.log(this.disabled);
+      if(this.disabled) {return}
       this.eventBus.$emit('update:selected', this.name, this)
     }
   },
@@ -53,6 +56,7 @@ export default {
 
 <style lang='scss' scoped>
 $blue: blue;
+$disabled-text-color: grey;
 .tabs-item {
   /* flex-grow: 1; */
   flex-shrink: 0;
@@ -65,6 +69,9 @@ $blue: blue;
   &.active {
     // background-color: red;
     color: $blue;
+  }
+  &.disabled {
+    color: $disabled-text-color;
   }
 }
 </style>
