@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-09 10:25:43
- * @LastEditTime: 2020-05-11 16:40:44
+ * @LastEditTime: 2020-05-12 13:44:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\tabs.vue
@@ -35,6 +35,9 @@ export default {
     }
   },
   mounted() {
+    if(this.$children.length === 0) {
+      console && console.warn && console.warn('tab的子组件应该是tabs-head和tabs-body, 但你没有写子组件')
+    }
     this.$children.forEach(vm => {
       if(vm.$options.name === "GuluTabsHead") {
         vm.$children.forEach(childVm => {
