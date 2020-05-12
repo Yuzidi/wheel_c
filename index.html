@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-23 09:58:20
- * @LastEditTime: 2020-05-12 09:59:11
+ * @LastEditTime: 2020-05-12 14:58:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ftmb-clientc:\Users\Administrator\Desktop\learn\wheel_c\index.html
@@ -51,9 +51,16 @@
 </style>
 
 <body>
-    <div id='app'>
+    <div id='app' style="padding: 100px">
+        
+        <g-popover>
+            <template slot='content'>
+                <div>popover内容</div>
+            </template>
+            <button>点我</button>
+        </g-popover>
 
-        <g-tabs :selected.sync='selectedTab'>
+        <!-- <g-tabs :selected.sync='selectedTab'>
             <g-tabs-head>
                 <template slot='actions'>
                     <div>设置</div>
@@ -69,7 +76,7 @@
                 <g-tabs-pane name='finance'>财经相关资讯</g-tabs-pane>
                 <g-tabs-pane name='sports'>体育相关资讯</g-tabs-pane>
             </g-tabs-body>
-        </g-tabs-pane>
+        </g-tabs-pane> -->
 
         <!-- <button @click='showToast'>点我</button> -->
         <!-- <g-layout style='height: 100vh;border: 1px solid red'>
