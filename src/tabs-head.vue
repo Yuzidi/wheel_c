@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-09 10:27:13
- * @LastEditTime: 2020-05-11 16:35:15
+ * @LastEditTime: 2020-05-12 09:40:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\tabs-header.vue
@@ -22,8 +22,9 @@ export default {
   inject: ["eventBus"],
   created() {
     this.eventBus.$on('update:selected', (item, vm) => {
-      // console.log(item);
-      console.log(vm);
+      let {width, height, top, left} = vm.$el.getBoundingClientRect()
+      this.$refs.line.style.width = width + 'px'
+      this.$refs.line.style.left = left + 'px'
     })
   }
 };
@@ -36,13 +37,13 @@ $blue: blue;
   display: flex;
   height: $tab-height;
   justify-content: flex-start;
-  border: 1px solid red;
+  // border: 1px solid red;
   position: relative;
   > .line {
     position: absolute;
     bottom: 0;
     border-bottom: 1px solid $blue;
-    width: 100px;
+    transition: all 350ms;
   }
   > .actions-wrapper {
     margin-left: auto;
