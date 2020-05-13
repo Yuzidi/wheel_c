@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-12 14:40:23
- * @LastEditTime: 2020-05-13 18:00:44
+ * @LastEditTime: 2020-05-13 18:09:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\popover.vue
@@ -47,8 +47,9 @@ export default {
   methods: {
     positionContent() {
       const { contentWrapper, triggerWrapper } = this.$refs;
+      const { height: height2 } = contentWrapper.getBoundingClientRect();
       document.body.appendChild(contentWrapper);
-      let { top, left, height, width } = triggerWrapper.getBoundingClientRect();
+      const { top, left, height, width } = triggerWrapper.getBoundingClientRect();
       if (this.position === "top") {
         contentWrapper.style.left = left + window.scrollX + "px";
         contentWrapper.style.top = top + window.scrollY + "px";
@@ -56,16 +57,11 @@ export default {
         contentWrapper.style.left = left + window.scrollX + "px";
         contentWrapper.style.top = top + height + window.scrollY + "px";
       } else if (this.position === "left") {
-        let { height: height2 } = contentWrapper.getBoundingClientRect();
-        console.log(height2);
         contentWrapper.style.left = left + window.scrollX + "px";
         contentWrapper.style.top =
           top + window.scrollY + (height - height2) / 2 + "px";
       } else if (this.position === "right") {
-        let { height: height2, width: width2 } = contentWrapper.getBoundingClientRect();
-        console.log(left);
         contentWrapper.style.left = left + width + window.scrollX + "px";
-        console.log(contentWrapper.style.left);
         contentWrapper.style.top =
           top + window.scrollY + (height - height2) / 2 + "px";
       }
