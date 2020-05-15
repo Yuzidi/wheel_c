@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-23 09:58:20
- * @LastEditTime: 2020-05-12 17:10:14
+ * @LastEditTime: 2020-05-15 17:59:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ftmb-clientc:\Users\Administrator\Desktop\learn\wheel_c\src\app.js
@@ -26,6 +26,8 @@ import TabsBody from './tabs-body.vue'
 import TabsItem from './tabs-item.vue'
 import TabsPane from './tabs-pane.vue'
 import Popover from './popover.vue'
+import Collapse from './collapse.vue'
+import CollapseItem from './collapse-item.vue'
 
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
@@ -45,6 +47,8 @@ Vue.component('g-tabs-body', TabsBody)
 Vue.component('g-tabs-item', TabsItem)
 Vue.component('g-tabs-pane', TabsPane)
 Vue.component('g-popover', Popover)
+Vue.component('g-collapse', Collapse)
+Vue.component('g-collapse-item', CollapseItem)
 Vue.use(plugin)
 
 new Vue({
