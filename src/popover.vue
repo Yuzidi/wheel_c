@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-12 14:40:23
- * @LastEditTime: 2020-05-14 15:19:00
+ * @LastEditTime: 2020-05-15 17:18:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\popover.vue
  -->
 <template>
-  <div class="popover" @click="onClick" ref="popover">
+  <div class="popover" ref="popover">
     <div
       ref="contentWrapper"
       class="content-wrapper"
@@ -42,11 +42,20 @@ export default {
       validator(value) {
         return ["top", "bottom", "left", "right"].indexOf(value) >= 0;
       }
+    },
+    trigger: {
+      type: String,
+      default: 'click',
+      validator(value) {
+        return ['click', 'hover'].indexOf(value) >= 0
+      }
     }
   },
   methods: {
     positionContent() {
       const { contentWrapper, triggerWrapper } = this.$refs;
+      contentWrapper.addEventListener('mouseenter', this.open)
+      contentWrapper.addEventListener('mouseleave', this.close)
       document.body.appendChild(contentWrapper);
       const { height: height2 } = contentWrapper.getBoundingClientRect();
       const { top, left, height, width } = triggerWrapper.getBoundingClientRect();
@@ -82,23 +91,53 @@ export default {
         document.removeEventListener("click", this.onClickDocument);
       }
     },
-    onShow() {
+    open() {
+      this.visible = true
       setTimeout(() => {
         this.positionContent();
         document.addEventListener("click", this.onClickDocument);
-      }, 1);
+      }, 10);
+    },
+    close() {
+      this.visible = false
+      document.removeEventListener("click", this.onClickDocument);
     },
     onClick(event) {
       if (this.$refs.triggerWrapper.contains(event.target)) {
-        this.visible = !this.visible;
         if (this.visible === true) {
-          this.onShow();
+          this.close();
         } else {
-          document.removeEventListener("click", this.onClickDocument);
+          this.open()
         }
       }
     }
-  }
+  },
+  mounted() {
+    if(this.trigger === 'click') {
+      this.$refs.popover.addEventListener('click', this.onClick)
+    }else {
+      this.$refs.popover.addEventListener('mouseenter', this.open)
+      this.$refs.popover.addEventListener('mouseleave', this.close)
+    }
+  },
+  destroyed() {
+    if(this.trigger === 'click') {
+      this.$refs.popover.removeEventListener('click', this.onClick)
+    }else {
+      this.$refs.popover.removeEventListener('mouseenter', this.open)
+      this.$refs.popover.removeEventListener('mouseleave', this.close)
+      this.$refs.contentWrapper.removeEventListener('mouseenter', this.open)
+      this.$refs.contentWrapper.removeEventListener('mouseleave', this.close)
+    }
+  },
+  computed:{
+    openEvent() {
+      return this.trigger === 'click' ? 'click': 'mouseenter'
+    },
+    closeEvent() {
+      return this.trigger === 'click' ? 'click': 'mouseleave'
+    }
+  },
 };
 </script>
 
