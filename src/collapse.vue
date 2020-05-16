@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-15 17:22:15
- * @LastEditTime: 2020-05-16 17:13:22
+ * @LastEditTime: 2020-05-16 17:31:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\collapse.vue
@@ -64,9 +64,11 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+
 $grey: #ddd;
 $border-radius: 4px;
 .collapse {
+  transition: all .5s;
   border: 1px solid $grey;
   border-radius: $border-radius;
 }

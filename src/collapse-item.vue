@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-15 17:22:15
- * @LastEditTime: 2020-05-16 17:02:48
+ * @LastEditTime: 2020-05-16 18:01:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\collapse.vue
@@ -9,9 +9,11 @@
 <template>
   <div class="collapseItem">
     <div class="title" @click="toggle">{{title}}</div>
+    <transition name="content">
     <div class="content" v-if="open">
       <slot></slot>
     </div>
+    </transition>
   </div>
 </template>
 
@@ -87,6 +89,17 @@ $border-radius: 4px;
   }
   > .content {
     padding: 8px;
+    
+  }
+  .content-enter-active, .content-leave-active {
+    transition: all .5s;
+  }
+  .content-enter, .content-leave-to {
+    // margin-left: -200px;
+    margin-top: -30px;
+    opacity: 0;
+    // height: 0;
   }
 }
+
 </style>
