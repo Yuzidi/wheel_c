@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-15 17:22:15
- * @LastEditTime: 2020-05-16 15:59:52
+ * @LastEditTime: 2020-05-16 17:13:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\collapse.vue
@@ -27,22 +27,38 @@ export default {
       default: false
     },
     selected: {
-      type: String,
-    },
+      type: Array
+    }
   },
   methods: {},
   mounted() {
-    this.eventBus.$emit('update:selected', this.selected)
-    this.eventBus.$on('update:selected', (name) => {
-      this.$emit('update:selected', name)
-    })
+    this.eventBus.$emit("update:selected", this.selected);
+    this.eventBus.$on("update:removeselected", name => {
+      let selectedCopy = JSON.parse(JSON.stringify(this.selected));
+      let index = this.selected.indexOf(name);
+      selectedCopy.splice(index, 1);
+      this.eventBus.$emit("update:selected", selectedCopy);
+      this.$emit("update:selected", selectedCopy);
+    });
+    this.eventBus.$on("update:addselected", name => {
+      let selectedCopy = JSON.parse(JSON.stringify(this.selected));
+      if (this.accordion) {
+        selectedCopy = [name];
+      } else {
+        selectedCopy.push(name);
+      }
+      this.eventBus.$emit("update:selected", selectedCopy);
+      this.$emit("update:selected", selectedCopy);
+    });
+    this.$children.forEach(vm => {
+      vm.accordion = this.accordion;
+      console.log(vm);
+    });
   },
   provide() {
-    if (this.accordion) {
-      return {
-        eventBus: this.eventBus
-      };
-    }
+    return {
+      eventBus: this.eventBus
+    };
   }
 };
 </script>

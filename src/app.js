@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-23 09:58:20
- * @LastEditTime: 2020-05-16 16:00:22
+ * @LastEditTime: 2020-05-16 16:10:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ftmb-clientc:\Users\Administrator\Desktop\learn\wheel_c\src\app.js
@@ -54,7 +54,7 @@ Vue.use(plugin)
 new Vue({
     el: '#app',
     data: {
-        selectedTab: '2'
+        selectedTab: ['2', '1']
     },
     methods: {
         yyy() {

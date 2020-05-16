@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-23 09:58:20
- * @LastEditTime: 2020-05-16 16:00:34
+ * @LastEditTime: 2020-05-16 17:09:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ftmb-clientc:\Users\Administrator\Desktop\learn\wheel_c\index.html
@@ -45,6 +45,7 @@
         background-color: skyblue;
         border: 1px solid #000;
     }
+
     .sider {
         width: 200px;
     }
@@ -53,10 +54,10 @@
 <body>
     <div id='app' style="padding: 100px">
         <div>
-            <g-collapse accordion :selected.sync='selectedTab'>
-            <g-collapse-item title='标题1' name='1'>内容1</g-collapse-item>
-            <g-collapse-item title='标题2' name='2'>内容2</g-collapse-item>
-            <g-collapse-item title='标题3' name='3'>内容3</g-collapse-item>
+            <g-collapse :selected.sync='selectedTab'>
+                <g-collapse-item title='标题1' name='1'>内容1</g-collapse-item>
+                <g-collapse-item title='标题2' name='2'>内容2</g-collapse-item>
+                <g-collapse-item title='标题3' name='3'>内容3</g-collapse-item>
             </g-collapse>
         </div>
         {{selectedTab}}
