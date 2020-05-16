@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-15 17:22:15
- * @LastEditTime: 2020-05-16 15:38:30
+ * @LastEditTime: 2020-05-16 15:53:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\collapse.vue
@@ -30,15 +30,18 @@ export default {
     title: {
       type: String,
       required: true
-    }
+    },
+    name: {
+      type: String,
+      required: true
+    },
   },
   methods: {
     toggle() {
       if(this.open) {
         this.open = false
       }else {
-        this.open = true
-        this.eventBus && this.eventBus.$emit('update:selected', this)
+        this.eventBus && this.eventBus.$emit('update:selected', this.name)
       }
     },
     close() {
@@ -46,9 +49,11 @@ export default {
     }
   },
   mounted() {
-    this.eventBus && this.eventBus.$on('update:selected', (vm) => {
-      if(vm !== this) {
+    this.eventBus && this.eventBus.$on('update:selected', (name) => {
+      if(name !== this.name) {
         this.close()
+      }else {
+        this.open = true
       }
     })
   },
