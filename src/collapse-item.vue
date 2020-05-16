@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-15 17:22:15
- * @LastEditTime: 2020-05-15 18:28:18
+ * @LastEditTime: 2020-05-16 15:38:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\collapse.vue
  -->
 <template>
   <div class="collapseItem">
-    <div class="title" @click='open = !open'>
+    <div class="title" @click='toggle'>
       {{title}}
     </div>
     <div class="content" v-if='open'>
@@ -20,6 +20,7 @@
 <script>
 export default {
   name: 'GuluCollapseItem',
+  inject:['eventBus'],
   data () {
     return {
       open: false
@@ -31,7 +32,26 @@ export default {
       required: true
     }
   },
-  methods: {}
+  methods: {
+    toggle() {
+      if(this.open) {
+        this.open = false
+      }else {
+        this.open = true
+        this.eventBus && this.eventBus.$emit('update:selected', this)
+      }
+    },
+    close() {
+      this.open = false
+    }
+  },
+  mounted() {
+    this.eventBus && this.eventBus.$on('update:selected', (vm) => {
+      if(vm !== this) {
+        this.close()
+      }
+    })
+  },
 }
 </script>
 
@@ -60,7 +80,7 @@ $border-radius: 4px;
     }  
   }
   > .content {
-    padding: 0 8px;
+    padding: 8px;
   }
 }
 </style>
