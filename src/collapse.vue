@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-15 17:22:15
- * @LastEditTime: 2020-05-16 15:52:59
+ * @LastEditTime: 2020-05-16 15:59:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\collapse.vue
@@ -33,6 +33,9 @@ export default {
   methods: {},
   mounted() {
     this.eventBus.$emit('update:selected', this.selected)
+    this.eventBus.$on('update:selected', (name) => {
+      this.$emit('update:selected', name)
+    })
   },
   provide() {
     if (this.accordion) {
