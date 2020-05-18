@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-15 17:22:15
- * @LastEditTime: 2020-05-18 16:41:20
+ * @LastEditTime: 2020-05-18 17:55:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\collapse.vue
@@ -51,7 +51,7 @@ export default {
           (this.$refs.contentwrapper.style.height =
             this.$refs.content.getBoundingClientRect().height + "px");
       }
-    },
+    }
   },
   created() {},
   mounted() {
@@ -60,7 +60,9 @@ export default {
       this.eventBus.$on("update:selected", names => {
         if (names.indexOf(this.name) < 0) {
           this.$refs.contentwrapper.style.height = "0px";
-          this.open = false;
+          setTimeout(() => {
+            this.open = false;
+          }, 500);
         } else {
           this.open = true;
           setTimeout(() => {
@@ -96,7 +98,7 @@ $border-radius: 4px;
     transition: all 0.5s;
     overflow: hidden;
   }
-   .content {
+  .content {
     border-top: 1px solid $grey;
     padding: 8px;
   }
