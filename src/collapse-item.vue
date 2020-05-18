@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-15 17:22:15
- * @LastEditTime: 2020-05-16 18:01:05
+ * @LastEditTime: 2020-05-18 16:41:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\collapse.vue
@@ -9,11 +9,11 @@
 <template>
   <div class="collapseItem">
     <div class="title" @click="toggle">{{title}}</div>
-    <transition name="content">
-    <div class="content" v-if="open">
-      <slot></slot>
+    <div class="content-wrapper" ref="contentwrapper">
+      <div class="content" v-if="open" ref="content">
+        <slot></slot>
+      </div>
     </div>
-    </transition>
   </div>
 </template>
 
@@ -40,23 +40,33 @@ export default {
   methods: {
     toggle() {
       if (this.open) {
-        this.eventBus &&
-          this.eventBus.$emit("update:removeselected", this.name);
+        setTimeout(() => {
+          this.eventBus &&
+            this.eventBus.$emit("update:removeselected", this.name);
+        }, 500);
+        this.$refs.contentwrapper.style.height = "0px";
       } else {
         this.eventBus && this.eventBus.$emit("update:addselected", this.name);
+        this.$refs.content &&
+          (this.$refs.contentwrapper.style.height =
+            this.$refs.content.getBoundingClientRect().height + "px");
       }
     },
-    close() {
-      this.open = false;
-    }
   },
+  created() {},
   mounted() {
+    this.$refs.contentwrapper.style.height = "0px";
     this.eventBus &&
       this.eventBus.$on("update:selected", names => {
         if (names.indexOf(this.name) < 0) {
-          this.close();
+          this.$refs.contentwrapper.style.height = "0px";
+          this.open = false;
         } else {
           this.open = true;
+          setTimeout(() => {
+            this.$refs.contentwrapper.style.height =
+              this.$refs.content.getBoundingClientRect().height + "px";
+          }, 100);
         }
       });
   }
@@ -68,8 +78,9 @@ $grey: #ddd;
 $border-radius: 4px;
 .collapseItem {
   > .title {
-    border: 1px solid $grey;
+    border-top: 1px solid $grey;
     margin: -1px;
+    margin-bottom: 0;
     min-height: 32px;
     display: flex;
     align-items: center;
@@ -81,25 +92,13 @@ $border-radius: 4px;
       border-top-right-radius: $border-radius;
     }
   }
-  &:last-child {
-    > .title:last-child {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
+  .content-wrapper {
+    transition: all 0.5s;
+    overflow: hidden;
   }
-  > .content {
+   .content {
+    border-top: 1px solid $grey;
     padding: 8px;
-    
-  }
-  .content-enter-active, .content-leave-active {
-    transition: all .5s;
-  }
-  .content-enter, .content-leave-to {
-    // margin-left: -200px;
-    margin-top: -30px;
-    opacity: 0;
-    // height: 0;
   }
 }
-
 </style>

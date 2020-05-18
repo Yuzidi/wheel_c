@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-15 17:22:15
- * @LastEditTime: 2020-05-16 17:31:32
+ * @LastEditTime: 2020-05-18 14:54:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \wheel_c\src\collapse.vue
@@ -52,7 +52,7 @@ export default {
     });
     this.$children.forEach(vm => {
       vm.accordion = this.accordion;
-      console.log(vm);
+      // console.log(vm);
     });
   },
   provide() {
