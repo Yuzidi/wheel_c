@@ -5,6 +5,6 @@ sidebarDepth: 2
 
 # 按钮
 
-使用方法哈哈哈哈
+使用方法
 
 <button-demos></button-demos>
