@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": ".\\node_modules\\.bin\\parcel index.html --no-cache",
-    "docs:dev": "vuepress dev docs --temp .temp",
+    "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
   "repository": {
@@ -48,7 +48,7 @@
     "sinon": "^7.5.0",
     "sinon-chai": "^3.4.0",
     "vue-template-compiler": "^2.6.11",
-    "vuepress": "^1.5.0"
+    "vuepress": "^1.4.0"
   },
   "alias": {
     "vue": "./node_modules/vue/dist/vue.common.js"

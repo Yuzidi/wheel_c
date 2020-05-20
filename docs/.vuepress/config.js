@@ -7,20 +7,31 @@
  * @FilePath: \wheel_c\docs\.vuepress\config.js
  */ 
 module.exports = {
+  base: '/wheel_c/',
   title: '轱辘 UI',
   description: '一个好用的 UI 框架',
+  extraWatchFiles:[
+    'components/button.md'
+  ],
   themeConfig: {
+    nav: [
+      { text: 'Home', link: '/install/' },
+      { text: 'components', link: '/components/' },
+      { text: 'External', link: 'https://google.com' },
+    ],
     sidebar: [
       {
         title: '入门',
+        collapsable: false,
         children: [
           '/install/',
-        '/get-started/',
+          '/get-started/',
         ]
       },
       {
         title: '组件',
-        children: ['/components/button']
+        collapsable: false,
+        children: ['/components/button.md', ]
       }
     ]
   }
