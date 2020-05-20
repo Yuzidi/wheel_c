@@ -54,8 +54,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-$blue: blue;
-$disabled-text-color: grey;
+@import 'var';
 .tabs-item {
   /* flex-grow: 1; */
   flex-shrink: 0;
