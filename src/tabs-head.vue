@@ -33,14 +33,14 @@ export default {
 <style lang='scss' scoped>
 $tab-height: 40px;
 $blue: blue;
-$border-color: #ddd;
+$tabs-border-color: #ddd;
 .tabs-head {
   display: flex;
   height: $tab-height;
   justify-content: flex-start;
   // border: 1px solid red;
   position: relative;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $tabs-border-color;
   > .line {
     position: absolute;
     bottom: 0;
