@@ -28,6 +28,7 @@ import TabsPane from './tabs-pane.vue'
 import Popover from './popover.vue'
 import Collapse from './collapse.vue'
 import CollapseItem from './collapse-item.vue'
+import Cascader from './cascader.vue'
 
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
@@ -49,28 +50,68 @@ Vue.component('g-tabs-pane', TabsPane)
 Vue.component('g-popover', Popover)
 Vue.component('g-collapse', Collapse)
 Vue.component('g-collapse-item', CollapseItem)
+Vue.component('g-cascader', Cascader)
 Vue.use(plugin)
 
 new Vue({
     el: '#app',
     data: {
-        selectedTab: ['2', '1']
+        source: [{
+                name: '浙江',
+                children: [{
+                        name: '杭州',
+                        children: [{
+                                name: '上城区'
+                            },
+                            {
+                                name: '下城区'
+                            },
+                            {
+                                name: '江干区'
+                            },
+                        ]
+                    },
+                    {
+                        name: '嘉兴',
+                        children: [{
+                                name: '南湖区'
+                            },
+                            {
+                                name: '秀洲区'
+                            },
+                            {
+                                name: '嘉善区'
+                            },
+                        ]
+                    },
+                    {
+                        name: '啊啊'
+                    },
+                ]
+            },
+            {
+                name: '江西',
+                children: [{
+                        name: '南昌',
+                        children: [{
+                                name: '新建县'
+                            },
+                            {
+                                name: '经济开发区'
+                            }
+                        ]
+                    },
+                    {
+                        name: '上饶',
+                        children: [{
+                            name: '鄱阳县'
+                        }]
+                    },
+                ]
+            }
+        ]
     },
-    methods: {
-        yyy() {
-          console.log('yyy');  
-        },
-        inputchange(e) {
-            console.log(e);
-        },
-        showToast() {
-            this.$toast(`aaaa${parseInt(Math.random()*100)}`, {
-                enableHtml: false,
-                position: 'middle ',
-                autoClose: 10
-            })
-        }
-    },
+    methods: {},
     created() {
         // this.$toast()
     }
