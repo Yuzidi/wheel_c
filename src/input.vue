@@ -51,6 +51,8 @@ export default {
 $box-shadow-color: rgba(0,0,0,0.5);
 $red: #F1453D;
 $border-color: #999;
+$input-height: 32px;
+$border-radius: 4px;
 .wrapper {
     font-size: 14px;
     display: inline-flex;
@@ -59,9 +61,9 @@ $border-color: #999;
         margin-right: 0.5em;
     }
     > input {
-        height: 32px;
-        border: 1px solid #999;
-        border-radius: 4px;
+        height: $input-height;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
         padding: 0 8px;
         font-size: inherit;
         &:hover {
