@@ -49,11 +49,16 @@
     .sider {
         width: 200px;
     }
+    .xxx {
+        height: 400px !important;
+    }
 </style>
 
 <body>
     <div id='app' style="padding: 100px">
-        <g-cascader :source='source'></g-cascader>
+        <p>1111</p>
+        <g-cascader :source='source' popover-class-name='xxx'></g-cascader>
+        <p>11111</p>
         <!-- <div>
             <g-collapse accordion :selected.sync='selectedTab'>
                 <g-collapse-item title='标题1' name='1'>

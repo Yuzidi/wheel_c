@@ -33,7 +33,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-@import 'var';
+@import 'varScss';
 @keyframes spin {
   0% {
     transform: rotate(0deg);

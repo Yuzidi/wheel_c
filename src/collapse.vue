@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-@import 'var';
+@import 'varScss';
 .collapse {
   transition: all .5s;
   border: 1px solid $grey;

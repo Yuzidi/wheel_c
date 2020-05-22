@@ -53,6 +53,8 @@ Vue.component('g-collapse-item', CollapseItem)
 Vue.component('g-cascader', Cascader)
 Vue.use(plugin)
 
+import './varScss.scss'
+
 new Vue({
     el: '#app',
     data: {
@@ -90,7 +92,7 @@ new Vue({
                 ]
             },
             {
-                name: '江西',
+                name: '江西省',
                 children: [{
                         name: '南昌',
                         children: [{
