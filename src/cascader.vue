@@ -2,6 +2,7 @@
   <div class="cascader">
     <div class="trigger" @click="popoverVisible = !popoverVisible">
       <slot></slot>
+      {{result || ''}}
     </div>
     <div class="popover-warpper" v-if="popoverVisible">
       <cascader-items :items="source" class="popover" :class="[popoverClassName]" :selected='selected' @update:selected='onUpdateSelected'></cascader-items>
@@ -38,11 +39,8 @@ export default {
     }
   },
   computed: {
-    level2Items() {
-      return this.level1Selected ? this.level1Selected.children : [];
-    },
-    level3Items() {
-      return this.level2Selected ? this.level2Selected.children : [];
+    result() {
+      return this.selected.map((item) => item.name).join('/')
     }
   },
   components: {
@@ -52,13 +50,18 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-// @import url('varScss');
+@import 'varScss';
 .cascader {
   position: relative;
+  display: inline-flex;
   .trigger {
     height: 32px;
-    width: 100px;
-    border: 1px solid black;
+    min-width: 10em;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 1em;
   }
   .popover-warpper {
     position: absolute;
@@ -66,6 +69,10 @@ export default {
     display: flex;
     // @extend .box-shadow;
     box-shadow: 0 0 5px rgba(63, 45, 45, 0.15);
+    top: 100%;
+    left: 0;
+    white-space: nowrap;
+    margin-top: 8px;
     .popover {
       height: 200px;
     }
