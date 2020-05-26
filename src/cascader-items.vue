@@ -38,6 +38,7 @@ export default {
     onClickLabel(item) {
       let selectedCopy = JSON.parse(JSON.stringify(this.selected))
       selectedCopy[this.level] = item
+      selectedCopy.splice(this.level + 1)
       this.$emit('update:selected', selectedCopy)
     },
     onUpdateSelected(newSelected) {
