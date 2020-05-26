@@ -4,7 +4,7 @@
       <slot></slot>
     </div>
     <div class="popover-warpper" v-if="popoverVisible">
-      <cascader-items :items="source" class="popover" :class="[popoverClassName]"></cascader-items>
+      <cascader-items :items="source" class="popover" :class="[popoverClassName]" :selected='selected' @update:selected='onUpdateSelected'></cascader-items>
     </div>
   </div>
 </template>
@@ -26,9 +26,17 @@ export default {
     },
     popoverClassName: {
       type: String
+    },
+    selected: {
+      type: Array,
+      default: () => []
+    },
+  },
+  methods: {
+    onUpdateSelected(newSelected) {
+      this.$emit('update:selected', newSelected)
     }
   },
-  methods: {},
   computed: {
     level2Items() {
       return this.level1Selected ? this.level1Selected.children : [];
