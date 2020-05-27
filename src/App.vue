@@ -3,82 +3,114 @@
     <p>{{selected && selected[0] && selected[0].name || 'kon'}}</p>
     <p>{{selected && selected[1] && selected[1].name || 'kon'}}</p>
     <p>{{selected && selected[2] && selected[2].name || 'kon'}}</p>
-    <g-cascader :source="source" popover-class-name="xxx" :selected.sync='selected'></g-cascader>
+    <g-cascader :source.sync="source" popover-class-name="xxx" :selected.sync='selected' :load-data='loadData'></g-cascader>
     <p>322</p>
   </div>
 </template>
 
 <script>
+import db from './db'
+function ajax(parentId = 0) {
+  return new Promise((success, fail) => {
+    setTimeout(() => {
+      let result = db.filter(item => item.parent_id == parentId)
+      success(result)
+    }, 2000)
+  })
+}
 export default {
   name: "App",
   data() {
     return {
       selected: [],
-      source: [
-        {
-          name: "浙江",
-          children: [
-            {
-              name: "杭州",
-              children: [
-                {
-                  name: "上城区"
-                },
-                {
-                  name: "下城区"
-                },
-                {
-                  name: "江干区"
-                }
-              ]
-            },
-            {
-              name: "嘉兴",
-              children: [
-                {
-                  name: "南湖区"
-                },
-                {
-                  name: "秀洲区"
-                },
-                {
-                  name: "嘉善区"
-                }
-              ]
-            },
-            {
-              name: "啊啊"
-            }
-          ]
-        },
-        {
-          name: "江西省",
-          children: [
-            {
-              name: "南昌",
-              children: [
-                {
-                  name: "新建县"
-                },
-                {
-                  name: "经济开发区"
-                }
-              ]
-            },
-            {
-              name: "上饶",
-              children: [
-                {
-                  name: "鄱阳县"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      source: []
+      // source: [
+      //   {
+      //     name: "浙江",
+      //     children: [
+      //       {
+      //         name: "杭州",
+      //         children: [
+      //           {
+      //             name: "上城区"
+      //           },
+      //           {
+      //             name: "下城区"
+      //           },
+      //           {
+      //             name: "江干区"
+      //           }
+      //         ]
+      //       },
+      //       {
+      //         name: "嘉兴",
+      //         children: [
+      //           {
+      //             name: "南湖区"
+      //           },
+      //           {
+      //             name: "秀洲区"
+      //           },
+      //           {
+      //             name: "嘉善区"
+      //           }
+      //         ]
+      //       },
+      //       {
+      //         name: "啊啊"
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     name: "江西省",
+      //     children: [
+      //       {
+      //         name: "南昌",
+      //         children: [
+      //           {
+      //             name: "新建县"
+      //           },
+      //           {
+      //             name: "经济开发区"
+      //           }
+      //         ]
+      //       },
+      //       {
+      //         name: "上饶",
+      //         children: [
+      //           {
+      //             name: "鄱阳县"
+      //           }
+      //         ]
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     name: "江西省",
+      //   },
+      // ]
     };
   },
-  components: {}
+  methods: {
+    loadData({id}, fn) {
+      ajax(id).then(result => {
+        fn(result)
+      })
+    },
+    xxx(item, fn) {
+      ajax()
+    }
+  },
+  components: {},
+  created() {
+    ajax(0).then(result => {
+      this.source = result
+      // this.source = result.map(item => {
+      //   item.children = item.children || []
+      //   return item
+      // })
+    })
+  }
 };
 </script>
 
@@ -126,6 +158,6 @@ body {
   width: 200px;
 }
 .xxx {
-  height: 400px !important;
+  height: 200px !important;
 }
 </style>
