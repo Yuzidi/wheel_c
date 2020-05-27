@@ -10,6 +10,7 @@
         class="popover"
         :class="[popoverClassName]"
         :selected="selected"
+        :load-data="loadData"
         @update:selected="onUpdateSelected"
       ></cascader-items>
     </div>
@@ -78,7 +79,9 @@ export default {
         toUpdate.children = result;
         this.$emit("update:source", sourceCopy);
       };
-      this.loadData(lastSelected, updateSource);
+      if (!lastSelected.isLeaf) {
+        this.loadData && this.loadData(lastSelected, updateSource);
+      }
     }
   },
   computed: {
@@ -89,8 +92,7 @@ export default {
   components: {
     CascaderItems
   },
-  created() {
-  }
+  created() {}
 };
 </script>
 
