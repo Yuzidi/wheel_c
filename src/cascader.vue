@@ -1,10 +1,10 @@
 <template>
-  <div class="cascader">
-    <div class="trigger" @click="popoverVisible = !popoverVisible">
+  <div class="cascader" ref='cascader'>
+    <div class="trigger" @click="toggle">
       <slot></slot>
       {{result || ''}}
     </div>
-    <div class="popover-warpper" v-if="popoverVisible">
+    <div class="popover-wrapper" v-if="popoverVisible" ref='popoverWrapper'>
       <cascader-items
         :items="source"
         class="popover"
@@ -44,6 +44,34 @@ export default {
     }
   },
   methods: {
+    onClickDocument(e) {
+      if (
+        !(
+          this.$refs.popoverWrapper &&
+          this.$refs.popoverWrapper.contains(e.target)
+        )
+      ) {
+        this.close()
+        document.removeEventListener("click", this.onClickDocument);
+      }
+    },
+    open() {
+      this.popoverVisible = true;
+      setTimeout(() => {
+        document.addEventListener("click", this.onClickDocument);
+      }, 10);
+    },
+    close() {
+      this.popoverVisible = false;
+      document.removeEventListener("click", this.onClickDocument);
+    },
+    toggle() {
+      if (this.popoverVisible === true) {
+        this.close();
+      } else {
+        this.open();
+      }
+    },
     onUpdateSelected(newSelected) {
       this.$emit("update:selected", newSelected);
       let lastSelected = newSelected[newSelected.length - 1];
@@ -110,7 +138,7 @@ export default {
     align-items: center;
     padding: 0 1em;
   }
-  .popover-warpper {
+  .popover-wrapper {
     position: absolute;
     background-color: #fff;
     display: flex;

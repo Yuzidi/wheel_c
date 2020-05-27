@@ -5,6 +5,14 @@
     <p>{{selected && selected[2] && selected[2].name || 'kon'}}</p>
     <g-cascader :source.sync="source" popover-class-name="xxx" :selected.sync='selected' :load-data='loadData'></g-cascader>
     <p>322</p>
+    <g-popover>
+      <template>
+        <button>点我</button>
+      </template>
+      <template slot='content'>
+        <div>哈哈哈</div>
+      </template>
+    </g-popover>
   </div>
 </template>
 
