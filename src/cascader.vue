@@ -1,5 +1,5 @@
 <template>
-  <div class="cascader" ref='cascader'>
+  <div class="cascader" ref='cascader' v-click-ouside='close'>
     <div class="trigger" @click="toggle">
       <slot></slot>
       {{result || ''}}
@@ -19,6 +19,7 @@
 
 <script>
 import CascaderItems from "./cascader-items";
+import clickOuside from './click-outside'
 export default {
   name: "GuluCascader",
   data() {
@@ -44,26 +45,26 @@ export default {
     }
   },
   methods: {
-    onClickDocument(e) {
-      if (
-        !(
-          this.$refs.popoverWrapper &&
-          this.$refs.popoverWrapper.contains(e.target)
-        )
-      ) {
-        this.close()
-        document.removeEventListener("click", this.onClickDocument);
-      }
-    },
+    // onClickDocument(e) {
+    //   if (
+    //     !(
+    //       this.$refs.popoverWrapper &&
+    //       this.$refs.popoverWrapper.contains(e.target)
+    //     )
+    //   ) {
+    //     this.close()
+    //     document.removeEventListener("click", this.onClickDocument);
+    //   }
+    // },
     open() {
       this.popoverVisible = true;
-      setTimeout(() => {
-        document.addEventListener("click", this.onClickDocument);
-      }, 10);
+      // setTimeout(() => {
+      //   document.addEventListener("click", this.onClickDocument);
+      // }, 10);
     },
     close() {
       this.popoverVisible = false;
-      document.removeEventListener("click", this.onClickDocument);
+      // document.removeEventListener("click", this.onClickDocument);
     },
     toggle() {
       if (this.popoverVisible === true) {
@@ -116,6 +117,9 @@ export default {
     result() {
       return this.selected.map(item => item.name).join(" / ");
     }
+  },
+  directives: {
+    clickOuside
   },
   components: {
     CascaderItems
