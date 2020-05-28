@@ -34,14 +34,6 @@ export default {
 
 <style lang='scss' scoped>
 @import 'varScss';
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 .g-button {
   height: $button-height;
   font-size: $font-size;

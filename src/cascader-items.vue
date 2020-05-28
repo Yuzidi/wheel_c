@@ -3,7 +3,14 @@
     <div class="left">
       <div class="label" v-for="(item, index) in items" :key="index" @click="onClickLabel(item)">
         <span class="name">{{item.name}}</span>
-        <Icon class="icon" v-if="rightArrowVisible(item)" name="right"></Icon>
+        <span class="icons">
+          <template v-if='item.name !== loadItem.name'>
+            <Icon class="icon next" v-if="rightArrowVisible(item)" name="right"></Icon>
+          </template>
+          <template v-else>
+            <Icon class="icon loading" name="Loading"></Icon>
+          </template>
+        </span>
       </div>
     </div>
     <div class="right" v-if="rightItems">
@@ -13,6 +20,7 @@
         :selected="selected"
         :load-data="loadData"
         @update:selected="onUpdateSelected"
+        :load-item='loadItem'
       ></gulu-cascader-items>
     </div>
   </div>
@@ -41,6 +49,10 @@ export default {
     },
     loadData: {
       type: Function
+    },
+    loadItem: {
+      type: Object,
+      default: () => ({})
     }
   },
   methods: {
@@ -54,7 +66,7 @@ export default {
       this.$emit("update:selected", newSelected);
     },
     rightArrowVisible(item) {
-      return this.loadData ? !item.isLeaf : item.children
+      return this.loadData ? !item.isLeaf : item.children;
     }
   },
   components: {
@@ -74,11 +86,9 @@ export default {
           return selected[0].children;
         }
       }
-    },
-    
+    }
   },
-  created() {
-  }
+  created() {}
 };
 </script>
 
@@ -109,9 +119,14 @@ export default {
       margin-right: 1.5em;
       user-select: none;
     }
-    .icon {
+    .icons {
       margin-left: auto;
-      transform: scale(0.7);
+      .next {
+        transform: scale(0.7);
+      }
+      .loading {
+        animation: spin 1s infinite linear;
+      }
     }
   }
 }

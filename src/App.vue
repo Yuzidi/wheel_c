@@ -3,7 +3,14 @@
     <p>{{selected && selected[0] && selected[0].name || 'kon'}}</p>
     <p>{{selected && selected[1] && selected[1].name || 'kon'}}</p>
     <p>{{selected && selected[2] && selected[2].name || 'kon'}}</p>
+    <div>
     <g-cascader :source.sync="source" popover-class-name="xxx" :selected.sync='selected' :load-data='loadData'></g-cascader>
+
+    </div>
+    <div>
+    <g-cascader :source.sync="source" popover-class-name="xxx" :selected.sync='selected' :load-data='loadData'></g-cascader>
+
+    </div>
     <p>322</p>
     <g-popover>
       <template>
