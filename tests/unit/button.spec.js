@@ -39,7 +39,7 @@ describe('Button.vue', () => {
     expect(useElements[0].getAttribute('xlink:href')).to.equal('#icon-Loading')
   })
 
-  it('icon 默认的 order 是 1', () => {
+  xit('icon 默认的 order 是 1', () => {
     const wrapper = mount(Button, {
       attachToDocument: true,
       propsData: {
@@ -48,25 +48,21 @@ describe('Button.vue', () => {
     })
     const vm = wrapper.vm
     const icon = vm.$el.querySelector('svg')
-    console.log(getComputedStyle(icon));
     expect(getComputedStyle(icon).order).to.eq('1')
   })
 
-  // it('设置 iconPosition 可以改变 order', () => {
-  //   const div = document.createElement('div')
-  //   document.body.appendChild(div)
-  //   const Constructor = Vue.extend(Button)
-  //   const vm = new Constructor({
-  //     propsData: {
-  //       icon: 'settings',
-  //       iconPosition: 'right'
-  //     }
-  //   }).$mount(div)
-  //   const icon = vm.$el.querySelector('svg')
-  //   expect(getComputedStyle(icon).order).to.eq('2')
-  //   vm.$el.remove()
-  //   vm.$destroy()
-  // })
+  xit('设置 iconPosition 可以改变 order', () => {
+    const wrapper = mount(Button, {
+      attachToDocument: true,
+      propsData: {
+        icon: 'settings',
+        iconPosition: 'right'
+      }
+    })
+    const vm = wrapper.vm
+    const icon = vm.$el.querySelector('svg')
+    expect(getComputedStyle(icon).order).to.eq('2')
+  })
   it('点击 button 触发 click 事件', () => {
     const wrapper = mount(Button, {
       propsData: {
