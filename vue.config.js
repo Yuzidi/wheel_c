@@ -5,5 +5,12 @@ module.exports = {
       template: 'public/index.html',
       filename: 'index.html',
     }
+  },
+  devServer: {
+    overlay: {
+      warnings: false,
+      errors: false
+   },
+   lintOnSave: false
   }
 }
