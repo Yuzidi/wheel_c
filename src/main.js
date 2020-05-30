@@ -23,6 +23,8 @@ import Collapse from './collapse.vue'
 import CollapseItem from './collapse-item.vue'
 import Cascader from './cascader.vue'
 import Transition from './transition.vue'
+import Slides from './slides.vue'
+import SlidesItem from './slides-item.vue'
 
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
@@ -46,6 +48,8 @@ Vue.component('g-collapse', Collapse)
 Vue.component('g-collapse-item', CollapseItem)
 Vue.component('g-cascader', Cascader)
 Vue.component('g-transition', Transition)
+Vue.component('g-slides', Slides)
+Vue.component('g-slides-item', SlidesItem)
 Vue.use(plugin)
 
 import './varScss.scss'
