@@ -1,133 +1,74 @@
 <template>
   <div id="app">
-    <p>{{selected && selected[0] && selected[0].name || 'kon'}}</p>
-    <p>{{selected && selected[1] && selected[1].name || 'kon'}}</p>
-    <p>{{selected && selected[2] && selected[2].name || 'kon'}}</p>
-    <div>
-    <g-cascader :source.sync="source" popover-class-name="xxx" :selected.sync='selected' :load-data='loadData'></g-cascader>
+    <!-- <div id="demo">
+      <transition name="fade" >
+        <button class="fadebutton" v-bind:key="docState" @click='docState = docState === "save" ? "Edit": "save"'>{{ buttonMessage }}</button>
+      </transition>
+    </div>-->
 
+    <div id="list-demo" class="list-demo" style="margin-top: 100px">
+      <button v-on:click="add">Add</button>
+      <button v-on:click="remove">Remove</button>
+      <transition-group name="list" tag="p">
+        <span v-for="item in items" v-bind:key="item" class="list-item">{{ item }}</span>
+      </transition-group>
     </div>
-    <div>
-    <g-cascader :source.sync="source" popover-class-name="xxx" :selected.sync='selected' :load-data='loadData'></g-cascader>
 
+    <div id="flip-list-demo" class="demo">
+      <button v-on:click="shuffle">Shuffle</button>
+      <transition-group name="flip-list" tag="ul">
+        <li v-for="item in items" v-bind:key="item" class="flip-item">{{ item }}</li>
+      </transition-group>
     </div>
-    <p>322</p>
-    <g-popover>
-      <template>
-        <button>点我</button>
-      </template>
-      <template slot='content'>
-        <div>哈哈哈</div>
-      </template>
-    </g-popover>
+
+
+    <button @click='visible=!visible'>toggle</button>
+    <!-- <div> -->
+      <g-transition :visible='visible'>
+        <p>呵呵哈哈哈</p>
+      </g-transition>
+    <!-- </div> -->
   </div>
 </template>
 
 <script>
-import db from './db'
-function ajax(parentId = 0) {
-  return new Promise((success, fail) => {
-    setTimeout(() => {
-      let result = db.filter(item => item.parent_id == parentId)
-      result.forEach(node => {
-        if(db.filter(item => item.parent_id == node.id).length > 0) {
-          node.isLeaf = false
-        }else {
-          node.isLeaf = true
-        }
-      })
-      success(result)
-    }, 300)
-  })
-}
 export default {
   name: "App",
   data() {
     return {
       selected: [],
-      source: []
-      // source: [
-      //   {
-      //     name: "浙江",
-      //     children: [
-      //       {
-      //         name: "杭州",
-      //         children: [
-      //           {
-      //             name: "上城区"
-      //           },
-      //           {
-      //             name: "下城区"
-      //           },
-      //           {
-      //             name: "江干区"
-      //           }
-      //         ]
-      //       },
-      //       {
-      //         name: "嘉兴",
-      //         children: [
-      //           {
-      //             name: "南湖区"
-      //           },
-      //           {
-      //             name: "秀洲区"
-      //           },
-      //           {
-      //             name: "嘉善区"
-      //           }
-      //         ]
-      //       },
-      //       {
-      //         name: "啊啊"
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     name: "江西省",
-      //     children: [
-      //       {
-      //         name: "南昌",
-      //         children: [
-      //           {
-      //             name: "新建县"
-      //           },
-      //           {
-      //             name: "经济开发区"
-      //           }
-      //         ]
-      //       },
-      //       {
-      //         name: "上饶",
-      //         children: [
-      //           {
-      //             name: "鄱阳县"
-      //           }
-      //         ]
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     name: "江西省",
-      //   },
-      // ]
+      show: true,
+      docState: "save",
+      items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      nextNum: 10,
+      visible: true
     };
   },
   methods: {
-    loadData({id}, fn) {
-      ajax(id).then(result => {
-        fn(result)
-      })
+    randomIndex: function() {
+      return Math.floor(Math.random() * this.items.length);
     },
-    xxx(item, fn) {
-      ajax()
+    add: function() {
+      this.items.splice(this.randomIndex(), 0, this.nextNum++);
+    },
+    remove: function() {
+      this.items.splice(this.randomIndex(), 1);
+    },
+    shuffle: function () {
+      this.items = _.shuffle(this.items)
     }
   },
   components: {},
-  created() {
-    ajax(0).then(result => {
-      this.source = result
-    })
+  created() {},
+  computed: {
+    buttonMessage: function() {
+      switch (this.docState) {
+        case "save":
+          return "Edit";
+        case "Edit":
+          return "save";
+      }
+    }
   }
 };
 </script>
@@ -141,6 +82,57 @@ export default {
 //   color: #2c3e50;
 //   margin-top: 60px;
 // }
+.fadebutton {
+  position: absolute;
+  width: 50px;
+  box-sizing: border-box;
+  transition: all 3s;
+}
+// 列表排序过渡
+.flip-item {
+  transition: all 1s;
+}
+// .flip-list-move {
+//   transition: transform 1s;
+// }
+
+// 列表进入/离开过渡
+.list-item {
+  display: inline-block;
+  transition: all 1s;
+  margin-right: 10px;
+}
+// .list-enter-active,
+// .list-leave-active {
+// }
+.list-leave-active {
+  position: absolute;
+}
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+// 多组件过渡
+
+// .fade-enter-active,
+// .fade-leave-active {
+// }
+// .list-leave-active {
+//   position: absolute;
+// }
+.fade-enter /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateX(100%);
+  background: red;
+  // width: 100px;
+}
+.fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  // width: 100px;
+  transform: translateX(-100%);
+  background: red;
+}
 * {
   margin: 0;
   padding: 0;

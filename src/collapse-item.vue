@@ -43,7 +43,7 @@ export default {
         setTimeout(() => {
           this.eventBus &&
             this.eventBus.$emit("update:removeselected", this.name);
-        }, 500);
+        }, 300);
         this.$refs.contentwrapper.style.height = "0px";
       } else {
         this.eventBus && this.eventBus.$emit("update:addselected", this.name);
@@ -62,13 +62,13 @@ export default {
           this.$refs.contentwrapper.style.height = "0px";
           setTimeout(() => {
             this.open = false;
-          }, 500);
+          }, 50);
         } else {
           this.open = true;
           setTimeout(() => {
             this.$refs.contentwrapper.style.height =
               this.$refs.content.getBoundingClientRect().height + "px";
-          }, 100);
+          }, 50);
         }
       });
   }
@@ -87,6 +87,7 @@ $border-radius: 4px;
     display: flex;
     align-items: center;
     padding: 0 8px;
+    cursor: pointer;
   }
   &:first-child {
     > .title {
@@ -95,7 +96,7 @@ $border-radius: 4px;
     }
   }
   .content-wrapper {
-    transition: all 0.5s;
+    transition: all 300ms;
     overflow: hidden;
   }
   .content {

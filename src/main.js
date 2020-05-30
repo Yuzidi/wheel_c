@@ -22,6 +22,7 @@ import Popover from './popover.vue'
 import Collapse from './collapse.vue'
 import CollapseItem from './collapse-item.vue'
 import Cascader from './cascader.vue'
+import Transition from './transition.vue'
 
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
@@ -44,6 +45,7 @@ Vue.component('g-popover', Popover)
 Vue.component('g-collapse', Collapse)
 Vue.component('g-collapse-item', CollapseItem)
 Vue.component('g-cascader', Cascader)
+Vue.component('g-transition', Transition)
 Vue.use(plugin)
 
 import './varScss.scss'
