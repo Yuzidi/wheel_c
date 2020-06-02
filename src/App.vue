@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <g-slides :selected="selected">
+    <g-slides :selected.sync="selected">
       <g-slides-item name="1">
         <div class="box">1</div>
       </g-slides-item>
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import { setInterval } from "timers";
 export default {
   name: "App",
   data() {
@@ -25,14 +24,14 @@ export default {
   },
   methods: {},
   created() {
-    let n = 1;
-    setInterval(() => {
-      if (n === 4) {
-        n = 1;
-      }
-      this.selected = n.toString();
-      n++;
-    }, 2000);
+    // let n = 1;
+    // setInterval(() => {
+    //   if (n === 4) {
+    //     n = 1;
+    //   }
+    //   this.selected = n.toString();
+    //   n++;
+    // }, 2000);
   }
 };
 </script>
@@ -44,7 +43,7 @@ export default {
   box-sizing: border-box;
 }
 .box {
-  width: 200px;
+  width: 100%;
   height: 150px;
   background: #ddd;
   border: 1px solid red;

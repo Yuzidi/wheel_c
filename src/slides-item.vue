@@ -1,6 +1,6 @@
 <template>
   <transition name="slide">
-    <div class="g-slides-item" v-if="visible">
+    <div class="g-slides-item" v-if="visible" :class="{reverse}">
       <slot></slot>
     </div>
   </transition>
@@ -11,7 +11,8 @@ export default {
   name: "GuluSlidesItem",
   data() {
     return {
-      selected: undefined
+      selected: undefined,
+      reverse: false
     };
   },
   props: {
@@ -23,9 +24,14 @@ export default {
   methods: {},
   computed: {
     visible() {
+      // console.log(this.reverse);
       return this.selected === this.name;
     }
-  }
+  },
+  created() {
+    // console.log(this.reverse);
+  },
+
 };
 </script>
 
@@ -34,6 +40,8 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
 }
 .slide-enter-active,
 .slide-leave-active {
@@ -44,5 +52,11 @@ export default {
 }
 .slide-leave-to {
   transform: translateX(-100%);
+}
+.slide-enter.reverse {
+  transform: translateX(-100%);
+}
+.slide-leave-to.reverse {
+  transform: translateX(100%);
 }
 </style>

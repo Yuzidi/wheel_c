@@ -1,8 +1,16 @@
 <template>
-  <div class="g-slides">
+  <div class="g-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <div class="g-slides-window" ref="window">
       <div class="g-slides-wrapper">
         <slot></slot>
+      </div>
+      <div class="g-slides-dots">
+        <span
+          :class="{active: selectedIndex === n-1}"
+          v-for="n in childrenLength"
+          :key="n"
+          @click="select(n-1)"
+        >{{n}} {{selectedIndex}}</span>
       </div>
     </div>
   </div>
@@ -12,27 +20,96 @@
 export default {
   name: "GuluSlides",
   data() {
-    return {};
+    return {
+      childrenLength: 0,
+      lastSelected: undefined,
+      timeId: undefined
+    };
   },
   props: {
     selected: {
       type: String
+    },
+    autoPlay: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
-    updateChildren() {
+    onMouseEnter() {
+      this.pause();
+    },
+    onMouseLeave() {
+      this.playAutomatically();
+    },
+    pause() {
+      window.clearTimeout(this.timeId);
+      this.timeId = undefined;
+    },
+    playAutomatically() {
+      if (this.timeId) {
+        return;
+      }
+      let index = this.names.indexOf(this.getSlected());
+      let run = () => {
+        // this.lastSelected = index
+        // console.log(this.lastSelected);
+        index = index - 1;
+        if (index === this.names.length) {
+          index = 0;
+        }
+        if (index === -1) {
+          index = this.names.length - 1;
+        }
+        this.select(index);
+        this.timeId = setTimeout(run, 3000);
+      };
+      this.timeId = setTimeout(run, 3000);
+    },
+    getSlected() {
       let first = this.$children[0];
-      let selected = this.selected || first.name;
+      return this.selected || first.name;
+    },
+    updateChildren() {
+      let selected = this.getSlected();
       this.$children.forEach(item => {
-        item.selected = selected;
+        let reverse = this.selectedIndex > this.lastSelected ? false : true;
+
+        if (this.selectedIndex == this.$children.length - 1 && this.lastSelected == 0) {
+          reverse = true;
+        }
+        if (
+          (this.selectedIndex === 0 &&
+            this.lastSelected === this.$children.length - 1) ||
+          this.lastSelected === undefined
+        ) {
+          reverse = false;
+        }
+        item.reverse = reverse;
+        this.$nextTick(() => {
+          item.selected = selected;
+        });
       });
+    },
+    select(index) {
+      this.lastSelected = this.selectedIndex;
+      this.$emit("update:selected", this.names[index]);
+    }
+  },
+  computed: {
+    selectedIndex() {
+      return this.selected ? this.names.indexOf(this.selected) : 0;
+    },
+    names() {
+      return this.$children.map(vm => vm.name);
     }
   },
   mounted() {
     this.updateChildren();
+    this.playAutomatically();
+    this.childrenLength = this.$children.length;
   },
   updated() {
-    console.log("aaa");
     this.updateChildren();
   }
 };
@@ -40,10 +117,20 @@ export default {
 
 <style lang='scss' scoped>
 .g-slides {
-  display: inline-block;
+  // display: inline-block;
   border: 1px solid black;
+  &-window {
+    overflow: hidden;
+  }
   &-wrapper {
     position: relative;
+  }
+  &-dots {
+    > span {
+      &.active {
+        background: red;
+      }
+    }
   }
 }
 </style>
