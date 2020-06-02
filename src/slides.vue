@@ -11,16 +11,17 @@
         <slot></slot>
       </div>
       <div class="g-slides-dots">
-        <span @click="onClickPre">
+        <span @click="onClickPre" data-action="prev">
           <g-icon name="left"></g-icon>
         </span>
         <span
           :class="{active: selectedIndex === n-1}"
           v-for="n in childrenLength"
           :key="n"
+          :data-index='n-1'
           @click="onClickDots(n-1)"
         >{{n}}</span>
-        <span @click="onClickNext">
+        <span @click="onClickNext" data-action="next">
           <g-icon name="right"></g-icon>
         </span>
       </div>
@@ -47,6 +48,10 @@ export default {
     autoPlay: {
       type: Boolean,
       default: true
+    },
+    autoPlayDelay: {
+      type: Number,
+      default: 3000
     }
   },
   methods: {
@@ -107,9 +112,9 @@ export default {
         let index = this.names.indexOf(this.getSlected());
         index = index + 1;
         this.select(index);
-        this.timeId = setTimeout(run, 3000);
+        this.timeId = setTimeout(run, this.autoPlayDelay);
       };
-      this.timeId = setTimeout(run, 3000);
+      this.timeId = setTimeout(run, this.autoPlayDelay);
     },
     getSlected() {
       let first = this.childrenItems[0];
