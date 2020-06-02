@@ -11,12 +11,18 @@
         <slot></slot>
       </div>
       <div class="g-slides-dots">
+        <span @click="onClickPre">
+          <g-icon name="left"></g-icon>
+        </span>
         <span
           :class="{active: selectedIndex === n-1}"
           v-for="n in childrenLength"
           :key="n"
           @click="select(n-1)"
         >{{n}}</span>
+        <span @click="onClickNext">
+          <g-icon name="right"></g-icon>
+        </span>
       </div>
     </div>
   </div>
@@ -43,6 +49,14 @@ export default {
     }
   },
   methods: {
+    onClickPre() {
+      this.select(this.selectedIndex - 1);
+      console.log(this.timeId);
+    },
+    onClickNext() {
+      this.select(this.selectedIndex + 1);
+      console.log(this.timeId);
+    },
     onTouchStart(e) {
       if (e.touches.length > 1) {
         return;
@@ -89,23 +103,23 @@ export default {
       this.timeId = setTimeout(run, 3000);
     },
     getSlected() {
-      let first = this.$children[0];
+      let first = this.childrenItems[0];
       return this.selected || first.name;
     },
     updateChildren() {
       let selected = this.getSlected();
-      this.$children.forEach(item => {
+      this.childrenItems.forEach(item => {
         let reverse = this.selectedIndex > this.lastSelected ? false : true;
         if (this.timeId) {
           if (
-            this.selectedIndex == this.$children.length - 1 &&
+            this.selectedIndex == this.childrenItems.length - 1 &&
             this.lastSelected == 0
           ) {
             reverse = true;
           }
           if (
             this.selectedIndex === 0 &&
-            this.lastSelected === this.$children.length - 1
+            this.lastSelected === this.childrenItems.length - 1
           ) {
             reverse = false;
           }
@@ -120,26 +134,31 @@ export default {
     select(index) {
       this.lastSelected = this.selectedIndex;
       if (index === this.names.length) {
-          index = 0;
-        }
-        if (index === -1) {
-          index = this.names.length - 1;
-        }
+        index = 0;
+      }
+      if (index === -1) {
+        index = this.names.length - 1;
+      }
       this.$emit("update:selected", this.names[index]);
     }
   },
   computed: {
     selectedIndex() {
-      return this.selected ? this.names.indexOf(this.selected) : 0;
+      let index = this.names.indexOf(this.selected);
+      return index === -1 ? 0 : index;
+      // return this.selected ? this.names.indexOf(this.selected) : 0;
     },
     names() {
-      return this.$children.map(vm => vm.name);
+      return this.childrenItems.map(vm => vm.name);
+    },
+    childrenItems() {
+      return this.$children.filter(vm => vm.$options.name === "GuluSlidesItem");
     }
   },
   mounted() {
     this.updateChildren();
     this.playAutomatically();
-    this.childrenLength = this.$children.length;
+    this.childrenLength = this.childrenItems.length;
   },
   updated() {
     this.updateChildren();
