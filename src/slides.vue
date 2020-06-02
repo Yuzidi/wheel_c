@@ -1,5 +1,11 @@
 <template>
-  <div class="g-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+  <div
+    class="g-slides"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
+    @touchstart="onTouchStart"
+    @touchend="onTouchEnd"
+  >
     <div class="g-slides-window" ref="window">
       <div class="g-slides-wrapper">
         <slot></slot>
@@ -23,7 +29,8 @@ export default {
     return {
       childrenLength: 0,
       lastSelected: undefined,
-      timeId: undefined
+      timeId: undefined,
+      startTouch: undefined
     };
   },
   props: {
@@ -36,6 +43,29 @@ export default {
     }
   },
   methods: {
+    onTouchStart(e) {
+      if (e.touches.length > 1) {
+        return;
+      }
+      this.startTouch = e.touches[0];
+      this.pause();
+    },
+    onTouchEnd(e) {
+      let endTouch = e.changedTouches[0];
+      let { clientX: x1, clientY: y1 } = this.startTouch;
+      let { clientX: x2, clientY: y2 } = endTouch;
+      let distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+      let deltaY = Math.abs(y2 - y1);
+      let rate = distance / deltaY;
+      if (rate > 2) {
+        if (x2 > x1) {
+          this.select(this.selectedIndex - 1);
+        } else {
+          this.select(this.selectedIndex + 1);
+        }
+      }
+      this.playAutomatically();
+    },
     onMouseEnter() {
       this.pause();
     },
@@ -52,15 +82,7 @@ export default {
       }
       let index = this.names.indexOf(this.getSlected());
       let run = () => {
-        // this.lastSelected = index
-        // console.log(this.lastSelected);
         index = index + 1;
-        if (index === this.names.length) {
-          index = 0;
-        }
-        if (index === -1) {
-          index = this.names.length - 1;
-        }
         this.select(index);
         this.timeId = setTimeout(run, 3000);
       };
@@ -97,6 +119,12 @@ export default {
     },
     select(index) {
       this.lastSelected = this.selectedIndex;
+      if (index === this.names.length) {
+          index = 0;
+        }
+        if (index === -1) {
+          index = this.names.length - 1;
+        }
       this.$emit("update:selected", this.names[index]);
     }
   },
