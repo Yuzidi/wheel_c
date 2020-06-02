@@ -18,7 +18,7 @@
           :class="{active: selectedIndex === n-1}"
           v-for="n in childrenLength"
           :key="n"
-          @click="select(n-1)"
+          @click="onClickDots(n-1)"
         >{{n}}</span>
         <span @click="onClickNext">
           <g-icon name="right"></g-icon>
@@ -36,7 +36,8 @@ export default {
       childrenLength: 0,
       lastSelected: undefined,
       timeId: undefined,
-      startTouch: undefined
+      startTouch: undefined,
+      triggerType: undefined
     };
   },
   props: {
@@ -50,12 +51,16 @@ export default {
   },
   methods: {
     onClickPre() {
+      this.triggerType = 'pre'
       this.select(this.selectedIndex - 1);
-      console.log(this.timeId);
     },
     onClickNext() {
+      this.triggerType = 'next'
       this.select(this.selectedIndex + 1);
-      console.log(this.timeId);
+    },
+    onClickDots(index) {
+      this.triggerType = 'dots'
+      this.select(index);
     },
     onTouchStart(e) {
       if (e.touches.length > 1) {
@@ -94,8 +99,8 @@ export default {
       if (this.timeId) {
         return;
       }
-      let index = this.names.indexOf(this.getSlected());
       let run = () => {
+        let index = this.names.indexOf(this.getSlected());
         index = index + 1;
         this.select(index);
         this.timeId = setTimeout(run, 3000);
@@ -110,7 +115,7 @@ export default {
       let selected = this.getSlected();
       this.childrenItems.forEach(item => {
         let reverse = this.selectedIndex > this.lastSelected ? false : true;
-        if (this.timeId) {
+        if (this.timeId || this.triggerType !== 'dots') {
           if (
             this.selectedIndex == this.childrenItems.length - 1 &&
             this.lastSelected == 0
@@ -124,7 +129,6 @@ export default {
             reverse = false;
           }
         }
-
         item.reverse = reverse;
         this.$nextTick(() => {
           item.selected = selected;
