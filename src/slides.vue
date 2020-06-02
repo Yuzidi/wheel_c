@@ -10,7 +10,7 @@
           v-for="n in childrenLength"
           :key="n"
           @click="select(n-1)"
-        >{{n}} {{selectedIndex}}</span>
+        >{{n}}</span>
       </div>
     </div>
   </div>
@@ -54,7 +54,7 @@ export default {
       let run = () => {
         // this.lastSelected = index
         // console.log(this.lastSelected);
-        index = index - 1;
+        index = index + 1;
         if (index === this.names.length) {
           index = 0;
         }
@@ -74,17 +74,21 @@ export default {
       let selected = this.getSlected();
       this.$children.forEach(item => {
         let reverse = this.selectedIndex > this.lastSelected ? false : true;
+        if (this.timeId) {
+          if (
+            this.selectedIndex == this.$children.length - 1 &&
+            this.lastSelected == 0
+          ) {
+            reverse = true;
+          }
+          if (
+            this.selectedIndex === 0 &&
+            this.lastSelected === this.$children.length - 1
+          ) {
+            reverse = false;
+          }
+        }
 
-        if (this.selectedIndex == this.$children.length - 1 && this.lastSelected == 0) {
-          reverse = true;
-        }
-        if (
-          (this.selectedIndex === 0 &&
-            this.lastSelected === this.$children.length - 1) ||
-          this.lastSelected === undefined
-        ) {
-          reverse = false;
-        }
         item.reverse = reverse;
         this.$nextTick(() => {
           item.selected = selected;
@@ -126,9 +130,29 @@ export default {
     position: relative;
   }
   &-dots {
+    padding: 8px 0;
+    display: flex;
+    justify-content: center;
     > span {
+      display: inline-block;
+      background: #ddd;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 8px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 12px;
+      &:hover {
+        cursor: pointer;
+      }
       &.active {
-        background: red;
+        background: #666;
+        color: #fff;
+        &:hover {
+          cursor: default;
+        }
       }
     }
   }
