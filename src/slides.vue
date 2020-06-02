@@ -51,15 +51,15 @@ export default {
   },
   methods: {
     onClickPre() {
-      this.triggerType = 'pre'
+      this.triggerType = "pre";
       this.select(this.selectedIndex - 1);
     },
     onClickNext() {
-      this.triggerType = 'next'
+      this.triggerType = "next";
       this.select(this.selectedIndex + 1);
     },
     onClickDots(index) {
-      this.triggerType = 'dots'
+      this.triggerType = "dots";
       this.select(index);
     },
     onTouchStart(e) {
@@ -83,13 +83,17 @@ export default {
           this.select(this.selectedIndex + 1);
         }
       }
-      this.playAutomatically();
+      if(this.autoPlay) {
+        this.playAutomatically();
+      }
     },
     onMouseEnter() {
       this.pause();
     },
     onMouseLeave() {
-      this.playAutomatically();
+      if (this.autoPlay) {
+        this.playAutomatically();
+      }
     },
     pause() {
       window.clearTimeout(this.timeId);
@@ -115,7 +119,7 @@ export default {
       let selected = this.getSlected();
       this.childrenItems.forEach(item => {
         let reverse = this.selectedIndex > this.lastSelected ? false : true;
-        if (this.timeId || this.triggerType !== 'dots') {
+        if (this.timeId || this.triggerType !== "dots") {
           if (
             this.selectedIndex == this.childrenItems.length - 1 &&
             this.lastSelected == 0
@@ -161,7 +165,9 @@ export default {
   },
   mounted() {
     this.updateChildren();
-    this.playAutomatically();
+    if (this.autoPlay) {
+      this.playAutomatically();
+    }
     this.childrenLength = this.childrenItems.length;
   },
   updated() {
