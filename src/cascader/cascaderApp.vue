@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import db from "../tests/fixtures/db";
+import db from "../../tests/fixtures/db";
 function ajax(parentId = 0) {
   return new Promise((success, fail) => {
     setTimeout(() => {

@@ -23,8 +23,8 @@ import Collapse from './collapse/collapse.vue'
 import CollapseItem from './collapse/collapse-item.vue'
 import Cascader from './cascader/cascader.vue'
 import Transition from './transition.vue'
-import Slides from './slides.vue'
-import SlidesItem from './slides-item.vue'
+import Slides from './slides/slides.vue'
+import SlidesItem from './slides/slides-item.vue'
 
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
