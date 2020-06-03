@@ -7,7 +7,8 @@
     "dev": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit --watch"
+    "test:unit": "vue-cli-service test:unit --watch",
+    "docs:dev": "vuepress dev docs"
   },
   "dependencies": {
     "core-js": "^3.6.4",
@@ -30,7 +31,8 @@
     "sass-loader": "^8.0.2",
     "sinon": "^9.0.2",
     "sinon-chai": "^3.5.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuepress": "^1.5.0"
   },
   "eslintConfig": {
     "root": true,

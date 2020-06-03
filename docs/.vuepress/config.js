@@ -1,23 +1,13 @@
-/*
- * @Author: your name
- * @Date: 2020-05-19 10:08:33
- * @LastEditTime: 2020-05-19 10:14:25
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \wheel_c\docs\.vuepress\config.js
- */ 
+const path = require('path')
 module.exports = {
-  base: '/wheel_c/',
-  title: '轱辘 UI',
-  description: '一个好用的 UI 框架',
-  extraWatchFiles:[
-    'components/button.md'
-  ],
+  base: '/gulu/',
+  title: '轱辘UI',
+  description: '一个好用的UI框架',
   themeConfig: {
     nav: [
-      { text: 'Home', link: '/install/' },
-      { text: 'components', link: '/components/' },
-      { text: 'External', link: 'https://google.com' },
+      {text: '主页', link: '/'},
+      {text: '文档', link: '/guide/'},
+      {text: '交流', link: 'https://google.com'},
     ],
     sidebar: [
       {
@@ -31,8 +21,21 @@ module.exports = {
       {
         title: '组件',
         collapsable: false,
-        children: ['/components/button.md', ]
-      }
+        children: [
+          '/components/button',
+          '/components/tabs',
+          '/components/input',
+          '/components/grid',
+          '/components/layout',
+          '/components/toast',
+          '/components/popover',
+          '/components/slides',
+        ]
+      },
+
     ]
+  },
+  scss:{
+    includePaths: [path.join(__dirname, '../../styles')]
   }
 }
