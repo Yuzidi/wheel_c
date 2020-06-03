@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Icon from "./icon";
+import Icon from "../icon";
 export default {
   name: "GuluButton",
   props: {
@@ -33,7 +33,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-@import 'varScss';
+@import '../varScss';
 .g-button {
   height: $button-height;
   font-size: $font-size;
