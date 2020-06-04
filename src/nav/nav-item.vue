@@ -7,6 +7,7 @@
 <script>
 export default {
   name: 'GuluNavItem',
+  inject:['root'],
   data() {
     return {
       selected: false
@@ -22,6 +23,9 @@ export default {
     onClick() {
       this.$emit('add:selected', this.name)
     }
+  },
+  created() {
+    this.root.addItem(this)
   },
   mounted() {
   }

@@ -9,7 +9,14 @@ import { log } from 'util';
 export default {
   name: "GuluNav",
   data() {
-    return {};
+    return {
+      childrenItems: []
+    };
+  },
+  provide() {
+    return {
+      root: this
+    }
   },
   props: {
     selected: {
@@ -22,6 +29,9 @@ export default {
     }
   },
   methods: {
+    addItem(vm){
+      this.childrenItems.push(vm)
+    },
     updateChildren() {
       this.childrenItems.forEach(vm => {
         if (this.selected.indexOf(vm.name) >= 0) {
@@ -48,7 +58,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.childrenItems[0].name);
     this.updateChildren();
     this.listenChildren();
   },
@@ -56,9 +65,6 @@ export default {
     this.updateChildren();
   },
   computed: {
-    childrenItems() {
-      return this.$children.filter(vm => vm.$options.name === "GuluNavItem");
-    }
   }
 };
 </script>
