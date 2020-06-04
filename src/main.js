@@ -1,5 +1,5 @@
 import Vue from "vue";
-import App from "./App.vue";
+import App from "./nav/navApp.vue";
 import Button from './button/button.vue'
 import Icon from './icon.vue'
 import ButtonGroup from './button/button-group'
@@ -25,6 +25,9 @@ import Cascader from './cascader/cascader.vue'
 import Transition from './transition.vue'
 import Slides from './slides/slides.vue'
 import SlidesItem from './slides/slides-item.vue'
+import Nav from './nav/nav.vue'
+import NavItem from './nav/nav-item.vue'
+import SubNav from './nav/sub-nav.vue'
 
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
@@ -50,6 +53,9 @@ Vue.component('g-cascader', Cascader)
 Vue.component('g-transition', Transition)
 Vue.component('g-slides', Slides)
 Vue.component('g-slides-item', SlidesItem)
+Vue.component('g-nav', Nav)
+Vue.component('g-nav-item', NavItem)
+Vue.component('g-sub-nav', SubNav)
 Vue.use(plugin)
 
 import '../styles/varScss.scss'
