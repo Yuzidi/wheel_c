@@ -47,7 +47,6 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-// @import 'varScss';
 $box-shadow-color: rgba(0,0,0,0.5);
 $red: #F1453D;
 $border-color: #999;

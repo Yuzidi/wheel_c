@@ -1,16 +1,12 @@
+const path = require('path')
 module.exports = {
-  pages: {
-    index: {
-      entry: 'src/main.js',
-      template: 'public/index.html',
-      filename: 'index.html',
+  css: {
+    loaderOptions: {
+      sass: {
+        sassOptions:{
+          includePaths: [path.resolve(__dirname, 'styles')]
+        }
+      },
     }
   },
-  // devServer: {
-  //   overlay: {
-  //     warnings: false,
-  //     errors: false
-  //  },
-  //  lintOnSave: false
-  // }
 }

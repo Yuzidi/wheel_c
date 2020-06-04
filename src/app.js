@@ -53,7 +53,7 @@ Vue.component('g-collapse-item', CollapseItem)
 Vue.component('g-cascader', Cascader)
 Vue.use(plugin)
 
-import './varScss.scss'
+import './styles/varScss.scss'
 
 new Vue({
     el: '#app',

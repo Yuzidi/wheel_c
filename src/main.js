@@ -52,7 +52,7 @@ Vue.component('g-slides', Slides)
 Vue.component('g-slides-item', SlidesItem)
 Vue.use(plugin)
 
-import './varScss.scss'
+import '../styles/varScss.scss'
 
 Vue.config.productionTip = false;
 

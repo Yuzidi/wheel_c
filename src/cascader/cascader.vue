@@ -131,7 +131,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-@import "../varScss";
+@import "varScss";
 .cascader {
   position: relative;
   display: inline-flex;

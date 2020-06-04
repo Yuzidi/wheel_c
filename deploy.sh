@@ -21,5 +21,6 @@ git commit -m 'deploy'
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
 git push -f git@github.com:beauty-c/wheel_c.git master:gh-pages
+git@github.com:Yuzidi/wheel_c.git
 
 cd -
