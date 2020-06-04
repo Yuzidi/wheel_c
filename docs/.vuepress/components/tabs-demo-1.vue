@@ -4,7 +4,7 @@
     <p>
       <strong>预览</strong>
     </p>
-    <g-tabs :selected="selected">
+    <g-tabs :selected.sync="selected">
       <g-tabs-head>
         <g-tabs-item name="1">1</g-tabs-item>
         <g-tabs-item name="2">2</g-tabs-item>

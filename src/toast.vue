@@ -25,7 +25,7 @@ export default {
   props: {
     autoClose: {
       type: [Boolean, Number],
-      default: 5,
+      default: 15,
       validator(value) {
         return value === false || typeof value === 'number'
       }
@@ -109,6 +109,7 @@ $animation-duration: .5s;
   100% {opacity: 1;}
 }
 .wrapper {
+  z-index: 30;
   position: fixed;
   left: 50%;
   transform: translateX(-50%);

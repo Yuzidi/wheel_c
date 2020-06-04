@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import GIcon from '../icon'
 export default {
   name: "GuluSlides",
   data() {
@@ -177,6 +178,9 @@ export default {
   },
   updated() {
     this.updateChildren();
+  },
+  components: {
+    GIcon
   }
 };
 </script>

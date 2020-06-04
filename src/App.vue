@@ -11,6 +11,18 @@
         <div class="box">3</div>
       </g-slides-item>
     </g-slides>
+
+    <button @click="showToast">点我</button>
+    <g-tabs :selected.sync="selected">
+      <g-tabs-head>
+        <g-tabs-item name="1">1</g-tabs-item>
+        <g-tabs-item name="2">2</g-tabs-item>
+      </g-tabs-head>
+      <g-tabs-body>
+        <g-tabs-pane name="1">content 1</g-tabs-pane>
+        <g-tabs-pane name="2">content 2</g-tabs-pane>
+      </g-tabs-body>
+    </g-tabs>
   </div>
 </template>
 
@@ -19,10 +31,14 @@ export default {
   name: "App",
   data() {
     return {
-      selected: "1"
+      selected: "1",
     };
   },
-  methods: {},
+  methods: {
+    showToast() {
+      this.$toast("点击弹出提示");
+    }
+  },
   created() {
     // let n = 1;
     // setInterval(() => {

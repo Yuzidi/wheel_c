@@ -7,9 +7,9 @@
  * @FilePath: \wheel_c\src\tabs-header.vue
  -->
 <template>
-  <div class="tabs-head">
+  <div class="tabs-head" ref="head">
     <slot></slot>
-    <div class="line" ref='line'></div>
+    <div class="line" ref="line"></div>
     <div class="actions-wrapper">
       <slot name="actions"></slot>
     </div>
@@ -21,11 +21,17 @@ export default {
   name: "GuluTabsHead",
   inject: ["eventBus"],
   created() {
-    this.eventBus.$on('update:selected', (item, vm) => {
-      let {width, height, top, left} = vm.$el.getBoundingClientRect()
-      this.$refs.line.style.width = width + 'px'
-      this.$refs.line.style.left = left + 'px'
-    })
+    this.eventBus.$on("update:selected", (item, vm) => {
+      this.updateLinePosition(vm)
+    });
+  },
+  methods: {
+    updateLinePosition(selectedVm) {
+      let { width, left } = selectedVm.$el.getBoundingClientRect();
+      let { left: left2 } = this.$refs.head.getBoundingClientRect();
+      this.$refs.line.style.width = `${width}px`;
+      this.$refs.line.style.left = `${left - left2}px`;
+    }
   }
 };
 </script>

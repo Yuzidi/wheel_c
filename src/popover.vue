@@ -45,20 +45,48 @@ export default {
     },
     trigger: {
       type: String,
-      default: 'click',
+      default: "click",
       validator(value) {
-        return ['click', 'hover'].indexOf(value) >= 0
+        return ["click", "hover"].indexOf(value) >= 0;
       }
     }
   },
   methods: {
+    addPopoverListeners() {
+      if (this.trigger === "click") {
+        this.$refs.popover.addEventListener("click", this.onClick);
+      } else {
+        this.$refs.popover.addEventListener("mouseenter", this.open);
+        this.$refs.popover.addEventListener("mouseleave", this.close);
+      }
+    },
+    removePopoverListeners() {
+      if (this.trigger === "click") {
+        this.$refs.popover.removeEventListener("click", this.onClick);
+      } else {
+        this.$refs.popover.removeEventListener("mouseenter", this.open);
+        this.$refs.popover.removeEventListener("mouseleave", this.close);
+      }
+    },
+    putBackContent() {
+      const { contentWrapper, popover } = this.$refs;
+      if (!contentWrapper) {
+        return;
+      }
+      popover.appendChild(contentWrapper);
+    },
     positionContent() {
       const { contentWrapper, triggerWrapper } = this.$refs;
-      contentWrapper.addEventListener('mouseenter', this.open)
-      contentWrapper.addEventListener('mouseleave', this.close)
+      contentWrapper.addEventListener("mouseenter", this.open);
+      contentWrapper.addEventListener("mouseleave", this.close);
       document.body.appendChild(contentWrapper);
       const { height: height2 } = contentWrapper.getBoundingClientRect();
-      const { top, left, height, width } = triggerWrapper.getBoundingClientRect();
+      const {
+        top,
+        left,
+        height,
+        width
+      } = triggerWrapper.getBoundingClientRect();
       let position = {
         top: {
           left: left + window.scrollX,
@@ -75,10 +103,10 @@ export default {
         right: {
           left: left + width + window.scrollX,
           top: top + window.scrollY + (height - height2) / 2
-        },
-      }
-      contentWrapper.style.left = position[this.position].left + 'px'
-      contentWrapper.style.top = position[this.position].top + 'px'
+        }
+      };
+      contentWrapper.style.left = position[this.position].left + "px";
+      contentWrapper.style.top = position[this.position].top + "px";
     },
     onClickDocument(e) {
       if (
@@ -92,14 +120,14 @@ export default {
       }
     },
     open() {
-      this.visible = true
+      this.visible = true;
       setTimeout(() => {
         this.positionContent();
         document.addEventListener("click", this.onClickDocument);
       }, 10);
     },
     close() {
-      this.visible = false
+      this.visible = false;
       document.removeEventListener("click", this.onClickDocument);
     },
     onClick(event) {
@@ -107,42 +135,31 @@ export default {
         if (this.visible === true) {
           this.close();
         } else {
-          this.open()
+          this.open();
         }
       }
     }
   },
   mounted() {
-    if(this.trigger === 'click') {
-      this.$refs.popover.addEventListener('click', this.onClick)
-    }else {
-      this.$refs.popover.addEventListener('mouseenter', this.open)
-      this.$refs.popover.addEventListener('mouseleave', this.close)
-    }
+    this.addPopoverListeners();
   },
   beforeDestroy() {
-    if(this.trigger === 'click') {
-      this.$refs.popover.removeEventListener('click', this.onClick)
-    }else {
-      this.$refs.popover.removeEventListener('mouseenter', this.open)
-      this.$refs.popover.removeEventListener('mouseleave', this.close)
-      this.$refs.contentWrapper.removeEventListener('mouseenter', this.open)
-      this.$refs.contentWrapper.removeEventListener('mouseleave', this.close)
-    }
+    this.putBackContent();
+    this.removePopoverListeners();
   },
-  computed:{
+  computed: {
     openEvent() {
-      return this.trigger === 'click' ? 'click': 'mouseenter'
+      return this.trigger === "click" ? "click" : "mouseenter";
     },
     closeEvent() {
-      return this.trigger === 'click' ? 'click': 'mouseleave'
+      return this.trigger === "click" ? "click" : "mouseleave";
     }
-  },
+  }
 };
 </script>
 
 <style lang='scss' scoped>
-@import 'varScss';
+@import "varScss";
 .popover {
   display: inline-block;
   vertical-align: top;

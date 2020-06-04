@@ -68,10 +68,10 @@
   }
 </script>
 <style lang="scss" scoped>
-  @import 'var';
+  // @import 'var';
   .box{
     height: 300px;
-    background: $blue;
+    background: #4a90e2;
     color: white;
     font-size: 30px;
     display: flex;
