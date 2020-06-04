@@ -1,6 +1,6 @@
 import chai, {expect} from 'chai'
 import sinonChai from 'sinon-chai'
-import TabsHead from '../../src/tabs-head'
+import TabsHead from '../../src/tabs/tabs-head'
 chai.use(sinonChai)
 
 describe('TabsHead.vue', () => {

@@ -1,6 +1,6 @@
 import chai, {expect} from 'chai'
 import sinonChai from 'sinon-chai'
-import TabsPane from '../../src/tabs-pane'
+import TabsPane from '../../src/tabs/tabs-pane'
 
 chai.use(sinonChai)
 
