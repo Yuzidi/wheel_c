@@ -1,5 +1,5 @@
 <template>
-  <div class="g-sub-nav">
+  <div class="g-sub-nav" v-click-ouside='close'>
     <span @click="onClick">
       <slot name="title"></slot>
     </span>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import clickOuside from '../click-outside'
 export default {
   name: "GuluSubNav",
   data() {
@@ -20,8 +21,14 @@ export default {
   methods: {
     onClick() {
       this.open = true;
+    },
+    close() {
+      this.open = false
     }
-  }
+  },
+  directives: {
+    clickOuside
+  },
 };
 </script>
 
@@ -30,8 +37,8 @@ export default {
   position: relative;
   > span {
     padding: 10px 20px;
-    display: inline-block;
-    vertical-align: text-top;
+    display: block;
+    vertical-align: top;
   }
   &-popover {
     position: absolute;
@@ -40,5 +47,10 @@ export default {
     left: 0;
     white-space: nowrap;
   }
+}
+.g-sub-nav .g-sub-nav .g-sub-nav-popover {
+  top: 0;
+  left: 100%;
+  margin-left: 8px;
 }
 </style>
