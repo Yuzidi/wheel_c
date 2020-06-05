@@ -3,26 +3,27 @@
     <g-nav :selected.sync="selected">
       <g-nav-item name="home">首页</g-nav-item>
       <!-- <g-nav-item name='about'>关于</g-nav-item> -->
-      <g-sub-nav>
+      <g-sub-nav name='about'>
         <template slot="title">关于</template>
         <g-nav-item name="options1">选项1</g-nav-item>
         <g-nav-item name="options2">选项2</g-nav-item>
         <g-nav-item name="options3">选项3</g-nav-item>
-        <g-sub-nav>
+        <g-sub-nav name='phone'>
           <template slot="title">联系方式</template>
           <g-nav-item name="wechat">微信</g-nav-item>
           <g-nav-item name="qq">qq</g-nav-item>
           <g-nav-item name="alipay">支付宝</g-nav-item>
-          <g-sub-nav>
-            <template slot="title">联系方式</template>
-            <g-nav-item name="wechat">微信</g-nav-item>
-            <g-nav-item name="qq">qq</g-nav-item>
-            <g-nav-item name="alipay">支付宝</g-nav-item>
+          <g-sub-nav name='barbecue'>
+            <template slot="title">烧烤</template>
+            <g-nav-item name="chicken">鸡腿</g-nav-item>
+            <g-nav-item name="hhh">哈哈哈</g-nav-item>
+            <g-nav-item name="xxx">嘻嘻嘻</g-nav-item>
           </g-sub-nav>
         </g-sub-nav>
       </g-sub-nav>
       <g-nav-item name="hire">招聘</g-nav-item>
     </g-nav>
+    <div>hhhhhhhhhhhhhhhhhhhhh</div>
   </div>
 </template>
 

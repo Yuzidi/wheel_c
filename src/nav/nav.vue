@@ -1,5 +1,6 @@
 <template>
   <div class="g-nav">
+    {{namePath}}
     <slot></slot>
   </div>
 </template>
@@ -10,7 +11,8 @@ export default {
   name: "GuluNav",
   data() {
     return {
-      childrenItems: []
+      childrenItems: [],
+      namePath: []
     };
   },
   provide() {
@@ -70,8 +72,12 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+@import 'varScss';
 .g-nav {
+  user-select: none;
   display: flex;
-  border: 1px solid red;
+  border-bottom: 1px solid $grey;
+  color: $color;
+  cursor: default;
 }
 </style>
