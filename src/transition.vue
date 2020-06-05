@@ -7,9 +7,9 @@
     @leave="leave"
     @after-leave="afterLeave"
   >
-    <div class="x-spread" v-show="visible">
-      <slot></slot>
-    </div>
+    <!-- <div class="x-spread" > -->
+      <slot v-show="visible"></slot>
+    <!-- </div> -->
   </transition>
 </template>
 <script>

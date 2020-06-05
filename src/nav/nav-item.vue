@@ -7,7 +7,7 @@
 <script>
 export default {
   name: 'GuluNavItem',
-  inject:['root'],
+  inject:['root', 'vertical'],
   data() {
     return {
       selected: false
@@ -23,6 +23,7 @@ export default {
     onClick() {
       this.root.namePath = []
       this.$parent.updateNamePath && this.$parent.updateNamePath()
+      !this.vertical && this.$parent.$parent.close && this.$parent.$parent.close('close')
       this.$emit('add:selected', this.name)
     }
   },

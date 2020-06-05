@@ -3,24 +3,28 @@
     <span @click="onClick" class="g-sub-nav-label">
       <slot name="title"></slot>
       <span class="g-sub-nav-icon" :class="{open}">
-        <g-icon name='right'></g-icon>
+        <g-icon class="g-sub-nav-icon-right" name="right"></g-icon>
+        <g-icon class="g-sub-nav-icon-down" name="down"></g-icon>
       </span>
     </span>
-    <div class="g-sub-nav-popover" v-show="open">
-      <slot></slot>
-    </div>
+    <g-transition :visible='open'>
+      <div class="g-sub-nav-popover" v-show="open" :class="{vertical}">
+        <slot></slot>
+      </div>
+    </g-transition>
   </div>
 </template>
 
 <script>
 import clickOuside from "../click-outside";
-import GIcon from '../icon'
+import GIcon from "../icon";
+import GTransition from '../transition'
 export default {
   name: "GuluSubNav",
-  inject:['root'],
+  inject: ["root", 'vertical'],
   data() {
     return {
-      open: false,
+      open: false
     };
   },
   props: {
@@ -33,19 +37,20 @@ export default {
     onClick() {
       this.open = !this.open;
     },
-    close() {
+    close(e) {
       this.open = false;
+      !this.vertical && e && this.$parent.$parent.close && this.$parent.$parent.close("close");
     },
     updateNamePath() {
-      this.root.namePath.unshift(this.name)
-      if(this.$parent.updateNamePath) {
-        this.$parent.updateNamePath()
+      this.root.namePath.unshift(this.name);
+      if (this.$parent.updateNamePath) {
+        this.$parent.updateNamePath();
       }
     }
   },
   computed: {
     active() {
-      return this.root.namePath.indexOf(this.name) >= 0? true:false
+      return this.root.namePath.indexOf(this.name) >= 0 ? true : false;
     }
   },
   directives: {
@@ -75,9 +80,24 @@ export default {
   &-label {
     padding: 10px 20px;
     display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   &-icon {
-    display: none;
+    display: inline-flex;
+    margin-left: 1em;
+    transition: transform 250ms;
+    font-size: 12px;
+      svg {
+        fill: $light-color;
+      }
+      &.open {
+        transform: rotate(180deg);
+      }
+    &-right {
+      display: none;
+    }
   }
   &-popover {
     font-size: $font-size;
@@ -91,6 +111,12 @@ export default {
     left: 0;
     white-space: nowrap;
     min-width: 8em;
+    &.vertical {
+      position: static;
+      border: none;
+      border-radius: 0px;
+      box-shadow: none;
+    }
   }
 }
 .g-sub-nav .g-sub-nav {
@@ -114,11 +140,17 @@ export default {
     display: inline-flex;
     margin-left: 1em;
     transition: transform 250ms;
-    svg{
-      fill: $light-color; 
+      svg {
+        fill: $light-color;
+      }
+      &.open {
+        transform: rotate(180deg);
+      }
+    &-right {
+      display: inline-flex;
     }
-    &.open {
-      transform: rotate(180deg);
+    &-down {
+      display: none;
     }
   }
 }
