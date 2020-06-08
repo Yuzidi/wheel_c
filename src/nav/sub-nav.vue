@@ -43,13 +43,14 @@ export default {
     },
     updateNamePath() {
       this.root.namePath.unshift(this.name);
-      if (this.$parent.updateNamePath) {
-        this.$parent.updateNamePath();
+      if (this.$parent.$parent.updateNamePath) {
+        this.$parent.$parent.updateNamePath();
       }
     }
   },
   computed: {
     active() {
+      // console.log(this.root.namePath);
       return this.root.namePath.indexOf(this.name) >= 0 ? true : false;
     }
   },

@@ -23,7 +23,7 @@
       </g-sub-nav>
       <g-nav-item name="hire">招聘</g-nav-item>
     </g-nav>
-    <g-nav :selected.sync="selected" vertical style="width: 300px">
+    <!-- <g-nav :selected.sync="selected" vertical style="width: 300px">
       <g-nav-item name="home">首页</g-nav-item>
       <g-sub-nav name='about'>
         <template slot="title">关于</template>
@@ -44,7 +44,7 @@
         </g-sub-nav>
       </g-sub-nav>
       <g-nav-item name="hire">招聘</g-nav-item>
-    </g-nav>
+    </g-nav> -->
     <div>hhhhhhhhhhhhhhhhhhhhh</div>
   </div>
 </template>

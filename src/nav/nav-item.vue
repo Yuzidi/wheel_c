@@ -22,7 +22,7 @@ export default {
   methods: {
     onClick() {
       this.root.namePath = []
-      this.$parent.updateNamePath && this.$parent.updateNamePath()
+      this.$parent.$parent.updateNamePath && this.$parent.$parent.updateNamePath()
       !this.vertical && this.$parent.$parent.close && this.$parent.$parent.close('close')
       this.$emit('add:selected', this.name)
     }
