@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <g-nav :selected.sync="selected" style="width: 300px">
-      <g-nav-item name="home">首页</g-nav-item>
+      <g-nav-item name="home">
+        <a href="www.baidu.com">hh</a>
+      </g-nav-item>
       <!-- <g-nav-item name='about'>关于</g-nav-item> -->
       <g-sub-nav name='about'>
         <template slot="title">关于</template>
@@ -23,7 +25,8 @@
       </g-sub-nav>
       <g-nav-item name="hire">招聘</g-nav-item>
     </g-nav>
-    <!-- <g-nav :selected.sync="selected" vertical style="width: 300px">
+    <div style="height: 300px"></div>
+    <g-nav :selected.sync="selected" vertical style="width: 300px">
       <g-nav-item name="home">首页</g-nav-item>
       <g-sub-nav name='about'>
         <template slot="title">关于</template>
@@ -44,7 +47,7 @@
         </g-sub-nav>
       </g-sub-nav>
       <g-nav-item name="hire">招聘</g-nav-item>
-    </g-nav> -->
+    </g-nav>
     <div>hhhhhhhhhhhhhhhhhhhhh</div>
   </div>
 </template>
@@ -54,7 +57,7 @@ export default {
   name: "App",
   data() {
     return {
-      selected: ["options1"]
+      selected: ["chicken"]
     };
   },
   methods: {},

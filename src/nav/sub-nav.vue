@@ -1,13 +1,13 @@
 <template>
-  <div class="g-sub-nav" v-click-ouside="close" :class="{active}">
-    <span @click="onClick" class="g-sub-nav-label">
+  <div class="g-sub-nav" v-click-ouside="close" :class="{active, vertical}">
+    <span @click="onClick" class="g-sub-nav-label" :class="{active, vertical}">
       <slot name="title"></slot>
       <span class="g-sub-nav-icon" :class="{open}">
-        <g-icon class="g-sub-nav-icon-right" name="right"></g-icon>
+        <g-icon class="g-sub-nav-icon-right" :name="vertical?'down':'right'"></g-icon>
         <g-icon class="g-sub-nav-icon-down" name="down"></g-icon>
       </span>
     </span>
-    <g-transition :visible='open'>
+    <g-transition :visible="open">
       <div class="g-sub-nav-popover" v-show="open" :class="{vertical}">
         <slot></slot>
       </div>
@@ -18,10 +18,10 @@
 <script>
 import clickOuside from "../click-outside";
 import GIcon from "../icon";
-import GTransition from '../transition'
+import GTransition from "../transition";
 export default {
   name: "GuluSubNav",
-  inject: ["root", 'vertical'],
+  inject: ["root", "vertical"],
   data() {
     return {
       open: false
@@ -39,7 +39,16 @@ export default {
     },
     close(e) {
       this.open = false;
-      !this.vertical && e && this.$parent.$parent.close && this.$parent.$parent.close("close");
+      !this.vertical &&
+        e &&
+        this.$parent.$parent.close &&
+        this.$parent.$parent.close("close");
+    },
+    switch(e) {
+      this.open = true;
+      this.vertical &&
+        this.$parent.$parent.switch &&
+        this.$parent.$parent.switch();
     },
     updateNamePath() {
       this.root.namePath.unshift(this.name);
@@ -50,7 +59,6 @@ export default {
   },
   computed: {
     active() {
-      // console.log(this.root.namePath);
       return this.root.namePath.indexOf(this.name) >= 0 ? true : false;
     }
   },
@@ -77,25 +85,36 @@ export default {
       width: 100%;
       border-bottom: 2px solid $blue;
     }
+    &.vertical {
+      &::after {
+        border: none;
+      }
+    }
   }
+
   &-label {
     padding: 10px 20px;
     display: block;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    &.vertical {
+      &:hover {
+        background-color: $blue-bg;
+      }
+    }
   }
   &-icon {
     display: inline-flex;
     margin-left: 1em;
     transition: transform 250ms;
     font-size: 12px;
-      svg {
-        fill: $light-color;
-      }
-      &.open {
-        transform: rotate(180deg);
-      }
+    svg {
+      fill: $light-color;
+    }
+    &.open {
+      transform: rotate(180deg);
+    }
     &-right {
       display: none;
     }
@@ -136,17 +155,30 @@ export default {
     align-items: center;
     justify-content: space-between;
     padding-right: 10px;
+    &.active {
+      background: $grey;
+      color: $color;
+      &.vertical {
+        background: inherit;
+        // color: $blue;
+      }
+    }
+    &.vertical {
+      &:hover {
+        background-color: $blue-bg;
+      }
+    }
   }
   .g-sub-nav-icon {
     display: inline-flex;
     margin-left: 1em;
     transition: transform 250ms;
-      svg {
-        fill: $light-color;
-      }
-      &.open {
-        transform: rotate(180deg);
-      }
+    svg {
+      fill: $light-color;
+    }
+    &.open {
+      transform: rotate(180deg);
+    }
     &-right {
       display: inline-flex;
     }
