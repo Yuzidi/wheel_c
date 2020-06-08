@@ -38,11 +38,13 @@ export default {
       this.open = !this.open;
     },
     close(e) {
-      this.open = false;
-      !this.vertical &&
-        e &&
-        this.$parent.$parent.close &&
-        this.$parent.$parent.close("close");
+      if (!this.vertical) {
+        this.open = false;
+        !this.vertical &&
+          e &&
+          this.$parent.$parent.close &&
+          this.$parent.$parent.close("close");
+      }
     },
     switch(e) {
       this.open = true;
