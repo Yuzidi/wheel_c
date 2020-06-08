@@ -27,7 +27,7 @@ export default {
       !this.vertical &&
         this.$parent.$parent.close &&
         this.$parent.$parent.close("close");
-      this.$emit("add:selected", this.name);
+      this.$emit("update:selected", this.name);
     }
   },
   created() {
@@ -36,13 +36,10 @@ export default {
   mounted() {
     this.$parent.$parent.updateNamePath &&
       this.$parent.$parent.updateNamePath();
-    this.root.$options.propsData.selected.forEach(vm => {
-      if (vm === this.name) {
-        this.vertical && this.$parent.$parent.switch();
-      }
-    });
-    this.selected && console.log("aaa");
-    this.$emit("add:selected", "barbecue");
+    if (this.root.$options.propsData.selected === this.name) {
+      this.vertical && this.$parent.$parent.switch();
+    }
+    this.$emit("update:selected", "barbecue");
   }
 };
 </script>
@@ -53,10 +50,9 @@ export default {
   padding: 10px 20px;
   position: relative;
   &:hover {
-      color: $color;
-    }
+    color: $color;
+  }
   &.selected {
-    // background-color: red;
     &::after {
       content: "";
       position: absolute;

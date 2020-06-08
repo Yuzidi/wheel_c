@@ -48,8 +48,9 @@
       </g-sub-nav>
       <g-nav-item name="hire">招聘</g-nav-item>
     </g-nav>
-    <div>hhhhhhhhhhhhhhhhhhhhh</div>
+    <div>{{selected}}</div>
   </div>
+  
 </template>
 
 <script>
@@ -57,7 +58,7 @@ export default {
   name: "App",
   data() {
     return {
-      selected: ["chicken"]
+      selected: "chicken"
     };
   },
   methods: {},
