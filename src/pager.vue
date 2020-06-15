@@ -1,12 +1,30 @@
 <template>
   <div class="gulu-pager">
-    <span v-for='page in pager' :key='page' class="gulu-pager-item" :class="{active: page === currentPage, separator: page === '...'}">
+      <span class="gulu-pager-nav prev" :class="{disable: currentPage === 1}">
+        <g-icon name='left'></g-icon>
+      </span>
+    <template v-for='page in pager'>
+      <template v-if='page === currentPage'>
+        <span class="gulu-pager-item current">{{page}}</span>
+      </template>
+      <template v-else-if='page === "..."'>
+        <g-icon class="gulu-pager-separator" name='dots'></g-icon>
+      </template>
+      <template v-else>
+        <span class="gulu-pager-item other">{{page}}</span>
+      </template>
+    </template>
+    <span class="gulu-pager-nav prev" :class="{disable: currentPage === totalPage}">
+        <g-icon name='right'></g-icon>
+      </span>
+    <!-- <span v-for='page in pager' :key='page' class="gulu-pager-item" :class="{active: page === currentPage, separator: page === '...'}">
       {{page}}
-    </span>
+    </span> -->
   </div>
 </template>
 
 <script>
+import GIcon from './icon'
 function unique(array) {
   // return [...new Set(array)] IE11以下不兼容
   const object = {}
@@ -18,7 +36,7 @@ function unique(array) {
 export default {
   name: "GuluPager",
   data() {
-    let arr = [1, this.totalPage, this.currentPage, this.currentPage - 1,this.currentPage - 2, this.currentPage + 1, this.currentPage + 2];
+    let arr = [1, this.totalPage, this.currentPage, this.currentPage - 1,this.currentPage - 2, this.currentPage + 1, this.currentPage + 2].filter(n => n>=1 && n<=this.totalPage);
     let pager = unique(arr.sort((a, b) => a-b)).reduce((prev, current, index, array) => {
       prev.push(current)
       array[index + 1] && array[index + 1] - array[index] > 1 && prev.push('...')
@@ -38,13 +56,26 @@ export default {
       required: true
     }
   },
-  methods: {}
+  methods: {},
+  components:{
+    GIcon
+  }
 };
 </script>
 
 <style lang='scss' scoped>
 @import 'varScss';
+$width: 20px;
+$height: 20px;
+$font-size: 12px;
 .gulu-pager {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  &-separator {
+    width: $width;
+    font-size: $font-size;
+  }
   &-item {
     border: 1px solid #e1e1e1;
     border-radius: $border-radius;
@@ -52,22 +83,40 @@ export default {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    font-size: 13px;
-    min-width: 24px;
-    height: 24px;
+    font-size: $font-size;
+    min-width: $width;
+    height: $height;
     box-sizing: border-box;
     margin: 4px;
     cursor: pointer;
-    &.separator {
-      border: none;
-      cursor: default;
-    }
-    &.active, &:hover {
+    &.current, &:hover {
       border-color: $blue;
     }
-    &.active {
+    &.current {
       border-color: $blue;
       cursor: default;
+    }
+  }
+  &-nav {
+    cursor: pointer;
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #e1e1e1;
+    border-radius: $border-radius;
+    font-size: 8px;
+    width: $width;
+    height: $height;
+    background: $grey;
+    svg {
+        fill: darken($grey, 70%)
+      }
+    &.disable {
+      cursor: not-allowed;
+      svg {
+        fill: darken($grey, 30%)
+      }
     }
   }
 }
