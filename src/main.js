@@ -1,5 +1,5 @@
 import Vue from "vue";
-import App from "./nav/navApp.vue";
+import App from "./pagerApp.vue";
 import Button from './button/button.vue'
 import Icon from './icon.vue'
 import ButtonGroup from './button/button-group'
@@ -28,6 +28,7 @@ import SlidesItem from './slides/slides-item.vue'
 import Nav from './nav/nav.vue'
 import NavItem from './nav/nav-item.vue'
 import SubNav from './nav/sub-nav.vue'
+import Pager from './pager.vue'
 
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
@@ -56,6 +57,7 @@ Vue.component('g-slides-item', SlidesItem)
 Vue.component('g-nav', Nav)
 Vue.component('g-nav-item', NavItem)
 Vue.component('g-sub-nav', SubNav)
+Vue.component('g-pager', Pager)
 Vue.use(plugin)
 
 import '../styles/varScss.scss'
