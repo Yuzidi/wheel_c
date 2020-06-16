@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <g-pager :total-page='10' :current-page='10'></g-pager>
+    <g-pager :total-page='10' :current-page.sync='currentPage' hideIfOnePage></g-pager>
   </div>
 </template>
 
@@ -9,7 +9,7 @@ export default {
   name: "App",
   data() {
     return {
-      
+      currentPage: 1
     };
   },
   methods: {
