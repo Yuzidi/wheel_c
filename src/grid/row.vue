@@ -16,7 +16,7 @@
 export default {
   name: "GuluRow",
   props: {
-    gutter: {
+    gutter: { // 元素之间的间隙
       type: [Number, String]
     },
     align: {

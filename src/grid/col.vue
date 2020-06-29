@@ -25,7 +25,7 @@ export default {
   name: "GuluCol",
   data() {
     return {
-      gutter: 0
+      gutter: 0 // 间隙
     };
   },
   props: {

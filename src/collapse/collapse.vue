@@ -22,30 +22,30 @@ export default {
     };
   },
   props: {
-    accordion: {
+    accordion: { // 是否开启手风琴模式,只展开一个
       type: Boolean,
       default: false
     },
-    selected: {
+    selected: { // 展开的是哪一个
       type: Array
     }
   },
   methods: {},
   mounted() {
     this.eventBus.$emit("update:selected", this.selected);
-    this.eventBus.$on("update:removeselected", name => {
+    this.eventBus.$on("update:removeselected", name => { // 监听当关闭item时, 触发父组件的修改selected
       let selectedCopy = JSON.parse(JSON.stringify(this.selected));
       let index = this.selected.indexOf(name);
       selectedCopy.splice(index, 1);
-      this.eventBus.$emit("update:selected", selectedCopy);
-      this.$emit("update:selected", selectedCopy);
+      this.eventBus.$emit("update:selected", selectedCopy); // 触发eventBus的事件
+      this.$emit("update:selected", selectedCopy); // 触发父组件的事件
     });
     this.eventBus.$on("update:addselected", name => {
       let selectedCopy = JSON.parse(JSON.stringify(this.selected));
-      if (this.accordion) {
+      if (this.accordion) { // 如果是手风琴, 就直接赋值
         selectedCopy = [name];
       } else {
-        selectedCopy.push(name);
+        selectedCopy.push(name); // 不是手风琴, 就push
       }
       this.eventBus.$emit("update:selected", selectedCopy);
       this.$emit("update:selected", selectedCopy);

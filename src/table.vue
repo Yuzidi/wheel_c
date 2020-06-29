@@ -9,12 +9,11 @@
           <th v-if="indexVisible">#</th>
           <th v-for="column in columns" :key='column.filed'>
             <div class="gulu-table-header">
-
-            {{column.text}}
-            <span class="gulu-table-sorter">
-              <g-icon name='asc'></g-icon>
-              <g-icon name='desc'></g-icon>
-            </span>
+              {{column.text}}
+              <span class="gulu-table-sorter" v-if='orderBy && orderBy[column.filed]'  @click='changeOrderBy(column.filed)'>
+                <g-icon name='asc' :class="{active: orderBy && orderBy[column.filed] === 'asc'}"></g-icon>
+                <g-icon name='desc' :class="{active: orderBy && orderBy[column.filed] === 'desc'}"></g-icon>
+              </span>
             </div>
           </th>
         </tr>
@@ -45,6 +44,10 @@ export default {
     return {};
   },
   props: {
+    orderBy: {
+      type: Object,
+      default: () => {}
+    },
     striped: {
       type: Boolean,
       default: true
@@ -83,24 +86,12 @@ export default {
     }
   },
   methods: {
-
-
-
-    // let count = 0
-
-    a () {
-      if(count >= 12) {
-        clearInterval(timeId)
-        count = 0
-        return
-      }
-      count += 1
+    changeOrderBy(key) {
+      let copyOrderBy = JSON.parse(JSON.stringify(this.orderBy))
+      let value = copyOrderBy[key] === 'asc' ? 'desc' : copyOrderBy[key] === 'desc' ? 'true' : 'asc'
+      copyOrderBy[key] = value
+      this.$emit('update:orderBy', copyOrderBy)
     },
-    b() {
-      count = 0
-      clearInterval(timeId)
-    },
-    
     inSelectedItems(item) {
       return this.selectedItems.filter(i => i.id === item.id).length > 0
     },
@@ -196,6 +187,9 @@ $darkengrey: darken($grey, 10%);
       width: 10px;
       height: 10px;
       fill: darken($grey, 20%);
+      &.active {
+        fill:darken($grey, 60%);
+      }
       &:first-child {
           position: relative;
           bottom: -1px;

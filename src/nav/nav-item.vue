@@ -39,7 +39,7 @@ export default {
     if (this.root.$options.propsData.selected === this.name) {
       this.vertical && this.$parent.$parent.switch();
     }
-    this.$emit("update:selected", "barbecue");
+    // this.$emit("update:selected", "barbecue");
   }
 };
 </script>

@@ -36,18 +36,18 @@ export default {
     };
   },
   props: {
-    items: {
+    items: { // 数据源
       type: Array
     },
-    selected: {
+    selected: { // 选中的值的数组
       type: Array,
       default: () => []
     },
-    level: {
+    level: { // 判定当前是第几级
       type: Number,
       default: 0
     },
-    loadData: {
+    loadData: { // 
       type: Function
     },
     loadItem: {
@@ -58,14 +58,14 @@ export default {
   methods: {
     onClickLabel(item) {
       let selectedCopy = JSON.parse(JSON.stringify(this.selected));
-      selectedCopy[this.level] = item;
+      selectedCopy[this.level] = item;// 选中某一个值, 就把selected后面的值删掉
       selectedCopy.splice(this.level + 1);
       this.$emit("update:selected", selectedCopy);
     },
-    onUpdateSelected(newSelected) {
+    onUpdateSelected(newSelected) {// 当子组件修改了selected的值, 交给根组件处理
       this.$emit("update:selected", newSelected);
     },
-    rightArrowVisible(item) {
+    rightArrowVisible(item) {// 判断该item是否是叶子, 是则不显示向右的箭头
       return this.loadData ? !item.isLeaf : item.children;
     }
   },
@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     rightItems() {
-      if (this.selected[this.level]) {
+      if (this.selected[this.level]) { // 过滤出当前items的name和选中的的name相等的元素
         let selected = this.items.filter(
           item => item.name === this.selected[this.level].name
         );
@@ -82,7 +82,7 @@ export default {
           selected &&
           selected[0].children &&
           selected[0].children.length > 0
-        ) {
+        ) { // 如果该元素有children并且children的长度大于0, 就显示, 并把children传给下一个组件
           return selected[0].children;
         }
       }

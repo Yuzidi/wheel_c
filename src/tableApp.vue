@@ -2,7 +2,7 @@
   <div id="app">
     {{selectedItems}}
     <div class="">
-      <g-table :columns='columns' :dataSource='dataSource' indexVisible bordered :selectedItems.sync='selectedItems'></g-table>
+      <g-table :columns='columns' :dataSource='dataSource' indexVisible bordered :selectedItems.sync='selectedItems'  :orderBy.sync='orderBy'></g-table>
     </div>
     <div class="">
       <g-table :columns='columns' :dataSource='dataSource' indexVisible bordered compact :striped='false' :selectedItems.sync='selectedItems'></g-table>
@@ -31,6 +31,10 @@ export default {
         {id: 5, name: 'cc', score: 100},
         {id: 6, name: 'dd', score: 80},
       ],
+      orderBy:{
+        name: 'asc',
+        score: 'desc',
+      },
       selectedItems: [],
     };
   },

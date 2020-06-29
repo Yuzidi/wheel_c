@@ -7,7 +7,7 @@
  * @FilePath: \wheel_c\src\icon.vue
  -->
 <template>
-  <svg class="icon">
+  <svg class="icon" @click='$emit("click", $event)'>
     <use :xlink:href="`#icon-${name}`" />
   </svg>
 </template>

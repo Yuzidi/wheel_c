@@ -1,4 +1,5 @@
 <template>
+<!-- 级联选择器 -->
   <div class="cascader" ref='cascader' v-click-ouside='close'>
     <div class="trigger" @click="toggle">
       <slot></slot>
@@ -30,17 +31,17 @@ export default {
     };
   },
   props: {
-    source: {
+    source: { // 数据源
       type: Array
     },
-    popoverClassName: {
+    popoverClassName: { // 为popover添加类, 可加样式
       type: String
     },
-    selected: {
+    selected: { // 选择的item和item的爸爸
       type: Array,
       default: () => []
     },
-    loadData: {
+    loadData: { // 显示loading的回调函数
       type: Function
     }
   },
@@ -79,7 +80,7 @@ export default {
       let simplest = (children, id) => {
         return children.filter(item => item.id == id)[0];
       };
-      let complex = (children, id) => {
+      let complex = (children, id) => {// 用递归的方式找到需要修改的那个子元素
         let noChildren = [];
         let hasChildren = [];
         children.forEach(item => {
@@ -102,7 +103,7 @@ export default {
           return undefined;
         }
       };
-      let updateSource = result => {
+      let updateSource = result => {// 修改数据源的回调函数, loadData请求数据成功之后执行
         this.loadItem = {}
         let sourceCopy = JSON.parse(JSON.stringify(this.source));
         let toUpdate = complex(sourceCopy, lastSelected.id);

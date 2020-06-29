@@ -10,8 +10,8 @@ export default {
   name: "GuluNav",
   data() {
     return {
-      childrenItems: [],
-      namePath: []
+      childrenItems: [], // 所有的nav-item数据
+      namePath: [] // 选中的菜单的一级级数组
     };
   },
   provide() {
@@ -21,11 +21,11 @@ export default {
     }
   },
   props: {
-    selected: {
+    selected: { // 选中的为哪一个
       type: String,
       default: () => []
     },
-    vertical: {
+    vertical: { // 是否竖的
       type: Boolean,
       default: false
     }
@@ -46,7 +46,7 @@ export default {
     listenChildren() {
       this.childrenItems.forEach(vm => {
         vm.$on("update:selected", name => {
-            this.$emit("update:selected", name);
+          this.$emit("update:selected", name);
         });
       });
     }
