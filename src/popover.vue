@@ -159,7 +159,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-@import "varScss";
+@import "../styles/varScss";
 .popover {
   display: inline-block;
   vertical-align: top;
