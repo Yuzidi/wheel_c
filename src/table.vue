@@ -44,76 +44,70 @@ export default {
     return {};
   },
   props: {
-    orderBy: {
+    orderBy: { // 每一项为升序还是降序
       type: Object,
       default: () => {}
     },
-    striped: {
+    striped: { // 表格是否为条纹
       type: Boolean,
       default: true
     },
-    compact: {
-      // 是否紧凑
+    compact: { // 是否紧凑
       type: Boolean,
       default: false
     },
-    selectedItems: {
+    selectedItems: { // 选择的item数组
       type: Array,
       default: () => []
     },
-    columns: {
-      // 表头数据
+    columns: { // 表头数据
       type: Array,
       required: true
     },
-    dataSource: {
-      // tbody数据
+    dataSource: { // tbody数据
       type: Array,
       required: true,
       validator(array){
         return !(array.filter(item => item.id === undefined).length > 0)
       }
     },
-    indexVisible: {
-      // 是否显示表格的索引
+    indexVisible: {// 是否显示表格的索引
       type: Boolean,
       default: false
     },
-    bordered: {
-      // 是否显示边框
+    bordered: {// 是否显示边框
       type: Boolean,
       default: false
     }
   },
   methods: {
-    changeOrderBy(key) {
+    changeOrderBy(key) { // 修改排序规则, 升序还是降序还是不排序
       let copyOrderBy = JSON.parse(JSON.stringify(this.orderBy))
       let value = copyOrderBy[key] === 'asc' ? 'desc' : copyOrderBy[key] === 'desc' ? 'true' : 'asc'
       copyOrderBy[key] = value
       this.$emit('update:orderBy', copyOrderBy)
     },
-    inSelectedItems(item) {
+    inSelectedItems(item) { // 过滤出选中的td,赋值给checked
       return this.selectedItems.filter(i => i.id === item.id).length > 0
     },
-    onChangeItem(item, index, e) {
+    onChangeItem(item, index, e) { // 当td的checked修改时
       let selected = e.target.checked;
       let copySelected = JSON.parse(JSON.stringify(this.selectedItems));
-      // console.log(copySelected);
-      if (selected) {
+      if (selected) { // 如果是选中,则push
         copySelected.push(item);
-      } else {
+      } else { // 如果不选中, 则删除
         copySelected.splice(copySelected.findIndex(i => i.id === item.id), 1);
         // copySelected = copySelected.filter(i => i.id !== item.id)
       }
       this.$emit("update:selectedItems", copySelected);
     },
-    onChangeAllItems(e) {
+    onChangeAllItems(e) { // 全选按钮改变事件
       let selected = e.target.checked;
       this.$emit("update:selectedItems", selected ? this.dataSource : []);
     }
   },
   computed: {
-    areAllItemsSelected() {
+    areAllItemsSelected() { // 计算出数据源和选中的item数组是否相等
       const a = this.dataSource.map(item => item.id).sort()
       const b = this.selectedItems.map(item => item.id).sort()
       return a.join('') === b.join('')
@@ -121,7 +115,7 @@ export default {
     },
   },
   watch: {
-    selectedItems() {
+    selectedItems() { // 监听选择项的修改判断全选框是半选还是全选, 还是不选
       if(this.selectedItems.length === this.dataSource.length) {
         this.$refs.allChecked.indeterminate = false
       }else if (this.selectedItems.length === 0) {
